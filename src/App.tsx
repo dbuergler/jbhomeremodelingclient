@@ -1,24 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Auth} from './components/auth/Auth';
+import Home from './components/home/Home';
 
-function App() {
+
+
+const App: React.FunctionComponent = () => {
+
+  // const updateToken = (newToken) => {
+  //   localStorage.setItem('token', newToken);
+  //   setSessionToken(newToken);
+  //   console.log(sessionToken);
+  // };
+  
+  // const clearToken = () => {
+  //   localStorage.clear();
+  //   setSessionToken('');
+  // }
+  
+  // const protectedViews = () => {
+  //   return (sessionToken === localStorage.getItem('token') ? <Home token={sessionToken}/>
+  //   : <Auth updateToken={updateToken}/>)
+  // }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="verticalCenter">
+      </div>
     </div>
   );
 }
