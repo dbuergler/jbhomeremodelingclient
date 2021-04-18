@@ -1,33 +1,57 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import {Auth} from './components/auth/Auth';
+import Auth from './components/auth/Auth';
+import SignUp from './components/auth/SignUp';
 import Home from './components/home/Home';
+import NavBar from './components/home/NavBar';
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 
 
-const App: React.FunctionComponent = () => {
+type Token ={
+  SessionToken: string
+}
 
-  // const updateToken = (newToken) => {
-  //   localStorage.setItem('token', newToken);
-  //   setSessionToken(newToken);
-  //   console.log(sessionToken);
-  // };
+class App extends Component<{}, Token> {
+  constructor(props: any){
+    super(props)
+    this.state={
+      SessionToken: '',
+    }
+  }
+
+  updateToken = (newToken: string) => {
+    localStorage.setItem('token', newToken);
+    this.setState({
+      SessionToken: newToken
+    })
+  };
   
-  // const clearToken = () => {
-  //   localStorage.clear();
-  //   setSessionToken('');
-  // }
+  clearToken = () => {
+    localStorage.clear();
+    this.setState({
+      SessionToken: ''
+    })
+  }
   
-  // const protectedViews = () => {
-  //   return (sessionToken === localStorage.getItem('token') ? <Home token={sessionToken}/>
-  //   : <Auth updateToken={updateToken}/>)
-  // }
-  return (
-    <div className="App">
-      <div className="verticalCenter">
-      </div>
-    </div>
-  );
+  protectedViews = () => {
+    return (this.state.SessionToken === localStorage.getItem('token') ? <Home token={this.state.SessionToken}/>
+    : <Auth updateToken={this.updateToken}/>)
+  }
+  render(){
+    return (
+      <div>
+        <Router>
+        <Switch>
+        <NavBar updateToken={this.updateToken}/>
+        <Route exact path = '/' component={Home}/>
+        {this.protectedViews()}
+        </Switch>
+        </Router>
+
+      </div> 
+    );
+  }
 }
 
 export default App;

@@ -1,6 +1,5 @@
-import React, { Component, MouseEvent } from 'react';
+import React, { Component} from 'react';
 import {Form, Input, Button, Select} from 'antd';
-import { FormInstance } from 'antd/lib/form';
 import APIURL from '../../helpers/environment';
 
 
@@ -12,11 +11,8 @@ const layout = {
 };
 
 const tailLayout = {
-    wrapperCol: {offset: 8, span: 16},
+    wrapperCol: {offset: 4, span: 16},
 };
-
-
-
 
 
 type SignUpData = {
@@ -29,7 +25,11 @@ type SignUpData = {
 
 }
 
-class SignUp extends Component<{}, SignUpData>{
+type PropsItems ={
+    updateToken: (newToken: string) => void
+}
+
+class SignUp extends Component<PropsItems, SignUpData>{
     constructor(props: any) {
         super(props);
         this.state = {
@@ -41,16 +41,44 @@ class SignUp extends Component<{}, SignUpData>{
             token: '',
             
         }
-
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(event: MouseEvent){
-        console.log('handle change', event)
+    handleChangeFirstName = (event: any) => {
+        this.setState({
+            firstName: event.target.value
+        })
+        console.log('handle change firstName', event)
     }
 
-    handleSubmit(event: MouseEvent ){
+    handleChangeLastName= (event: any) => {
+        this.setState({
+            lastName: event.target.value
+        })
+        console.log('handle change lastName', event)
+    }
+
+    handleChangeUsername = (event: any) => {
+        this.setState({
+            username: event.target.value
+        })
+        console.log('handle change username', event)
+    }
+
+    handleChangePassword = (event: any) => {
+        this.setState({
+            password: event.target.value
+        })
+        console.log('handle change password', event)
+    }
+
+    handleChangeRole = (event: any) => {
+        this.setState({
+            role: event.target.value
+        })
+        console.log('handle change role', event)
+    }
+
+    handleSubmit(event: any){
         console.log('form submitted');
         event.preventDefault();
         fetch(`${APIURL}/user/create`, {
@@ -62,27 +90,25 @@ class SignUp extends Component<{}, SignUpData>{
     }).then(
         (response) => response.json()
     ).then((data) => {
-        // this.props.updateToken(data.sessionToken)
+        this.props.updateToken(data.sessionToken)
     })
 };
     
-
-formRef = React.createRef<FormInstance>();
 
 render() {
     return (
     <div>
         <h1>Sign Up</h1>
-    <Form>
+    <Form {...layout} onFinish={this.handleSubmit}>
     <Form.Item
         name="first name"
-        rules={[{ required: true, message: 'Please input your username!' }]}
+        rules={[{ required: true, message: 'Please input your First Name!' }]}
     >
         <Input type ="firstName" name="first name" placeholder="First Name"  />
     </Form.Item>
     <Form.Item
         name="last name"
-        rules={[{ required: true, message: 'Please input your username!' }]}
+        rules={[{ required: true, message: 'Please input your Last Name!' }]}
     >
         <Input type ="lastName" name="last name" placeholder="Last Name" />
     </Form.Item>

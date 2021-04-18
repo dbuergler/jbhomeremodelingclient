@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 
-class Home extends Component {
+
+type PropsItems ={
+    token: string
+}
+
+class Home extends Component <PropsItems, {}> {
 
 }
 

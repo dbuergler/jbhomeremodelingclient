@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import SignUp from './SignUp';
 
 
-export class Auth extends Component {
+type PropsItems ={
+    updateToken: (newToken: string) => void
+}
+
+class Auth extends Component<PropsItems, {}> {
 
     render() {
         return (
             <div>
-                <SignUp/>
+                <SignUp updateToken={this.props.updateToken}/>
             </div>
         )
     }
