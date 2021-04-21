@@ -2,7 +2,6 @@ import React, { Component} from 'react';
 import {Form, Input, Button, Select} from 'antd';
 import APIURL from '../../helpers/environment';
 
-
 const {Option} = Select;
 
 const layout = {
@@ -15,20 +14,22 @@ const tailLayout = {
 };
 
 
-type SignUpData = {
+
+type LoginData = {
     firstName: string,
     lastName: string,
     username: string,
     password: string,
     role: string,
-
 }
 
-type PropsItems = {
-    updateToken: (newToken: string) => void,
+type PropsItems ={
+    updateToken: (newToken: string) => void
+    // randomFunction: (newToken: string) => void
 }
 
-class SignUp extends Component<PropsItems, SignUpData>{
+
+class Login extends Component<PropsItems, LoginData>{
     constructor(props:PropsItems) {
         super(props);
         this.state = {
@@ -79,7 +80,7 @@ class SignUp extends Component<PropsItems, SignUpData>{
     handleSubmit = () => {
         console.log('form submitted', this.state);
         // event.preventDefault();
-        const url = `${APIURL}/user/create`
+        const url = `${APIURL}/user/login`
             fetch(url, {
                 method: 'POST',
                 body: JSON.stringify({firstName: this.state.firstName, lastName: this.state.lastName, username: this.state.username, password: this.state.password, role: this.state.role}),
@@ -98,7 +99,7 @@ class SignUp extends Component<PropsItems, SignUpData>{
 render() {
     return (
     <div>
-        <h1>Sign Up</h1>
+        <h1>Login</h1>
     <Form {...layout} onFinish={this.handleSubmit}>
     <Form.Item
         name="first name"
@@ -163,6 +164,4 @@ render() {
     }
 }
 
-
-
-export default SignUp;
+export default Login;

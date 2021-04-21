@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb, Button } from 'antd';
 import {
-DesktopOutlined,
 HomeOutlined,
 CalendarOutlined,
 DollarCircleOutlined,
 ProjectOutlined,
 UserOutlined,
+LoginOutlined
 } from '@ant-design/icons';
-import {Route, Link} from 'react-router-dom';
+import {Switch, Route, Link, NavLink} from 'react-router-dom';
 import SignUp from '../auth/SignUp';
+import Login from '../auth/Login';
+import Auth from '../auth/Auth';
+import Home from './Home';
 
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -17,18 +20,22 @@ const { SubMenu } = Menu;
 
 type PropsItems ={
     updateToken: (newToken: string) => void
+    clearToken: () => void
 }
 
 
 class NavBar extends Component<PropsItems, {}> {
     state = {
         collapsed: false,
+        showLogin: true,
+        
     };
 
     onCollapse = (collapsed: any) => {
         console.log(collapsed);
         this.setState({ collapsed });
     };
+
 
 
     render() {
@@ -41,13 +48,13 @@ class NavBar extends Component<PropsItems, {}> {
                 <div className="logo" />
                 <Menu style={{backgroundColor: '#183446'}} theme="dark" defaultSelectedKeys={['1']} mode="inline">
                     <Menu.Item key="1" icon={<HomeOutlined />}>
-                    Home
-                    </Menu.Item>
-                    <Menu.Item key="2" icon={<DesktopOutlined />}>
-                    Sign Up/Log In
+                    <Link to="/home">Home
+                    </Link>
                     </Menu.Item>
                     <Menu.Item key="9" icon={<CalendarOutlined />}>
-                    Calendar
+                        <Link to="/calendar">
+                            <NavLink to ="/calendar" style={{color: 'white'}}>Calendar</NavLink>
+                        </Link>
                     </Menu.Item>
                     <SubMenu key="sub1" icon={<UserOutlined />} title="User">
                     <Menu.Item key="3" icon={<ProjectOutlined />}>My Projects</Menu.Item>
@@ -55,21 +62,18 @@ class NavBar extends Component<PropsItems, {}> {
                     <Menu.Item key="6" icon={<DollarCircleOutlined />} title="Payment">
                         Payment
                     </Menu.Item>
+                <Menu.Item icon={<LoginOutlined />}onClick={this.props.clearToken}>Logout</Menu.Item>
                     
                 </Menu>
                 </Sider>
                 <Layout className="site-layout">
                 <Header className="site-layout-background" style={{ padding: 0, backgroundColor: '#183446'}} />
                 <Content style={{ margin: '0 16px' }}>
-                    <Breadcrumb style={{ margin: '16px 0' }}>
-                    <Breadcrumb.Item>User</Breadcrumb.Item>
-                    <Breadcrumb.Item>Bill</Breadcrumb.Item>
-                    </Breadcrumb>
-                    <div className="site-layout-background" style={{ padding: 24, minHeight: 360, }}>
-                    Bill is a cat.
-                    </div>
+                    <Switch>
+                    <Route exact path = '/home'  component={() => <SignUp updateToken={this.props.updateToken}/>}/>
+                    </Switch>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>JB Home Remodeling Create by Daniel Buergler </Footer>
+                <Footer style={{ textAlign: 'center' }}>JB Home Remodeling Created by Daniel Buergler </Footer>
                 </Layout>
             </Layout>
             </div>
@@ -80,4 +84,8 @@ class NavBar extends Component<PropsItems, {}> {
 
 
 export default NavBar;
+
+function showLogin(arg0: boolean) {
+    throw new Error('Function not implemented.');
+}
 
