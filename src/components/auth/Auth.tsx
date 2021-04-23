@@ -18,9 +18,12 @@ class Auth extends Component<PropsItems, {}> {
     
 }
 
+
     render() {
         return (
             <div>
+                <SignUp updateToken={this.props.updateToken}/>
+                <Login updateToken={this.props.updateToken}/>
             </div>
         )
     }

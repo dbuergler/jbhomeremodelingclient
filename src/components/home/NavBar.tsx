@@ -6,13 +6,13 @@ CalendarOutlined,
 DollarCircleOutlined,
 ProjectOutlined,
 UserOutlined,
-LoginOutlined
+LoginOutlined,
+AccountBookOutlined 
 } from '@ant-design/icons';
 import {Switch, Route, Link, NavLink} from 'react-router-dom';
-import SignUp from '../auth/SignUp';
-import Login from '../auth/Login';
 import Auth from '../auth/Auth';
 import Home from './Home';
+import Calendar from '../calendar/Calendar';
 
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -51,6 +51,11 @@ class NavBar extends Component<PropsItems, {}> {
                     <Link to="/home">Home
                     </Link>
                     </Menu.Item>
+                    <Menu.Item key="2" icon={<AccountBookOutlined />}>
+                    <Link to="/account">
+                    <NavLink to ="/account" style={{color: "white"}}>Account Set Up</NavLink>
+                    </Link>
+                    </Menu.Item>
                     <Menu.Item key="9" icon={<CalendarOutlined />}>
                         <Link to="/calendar">
                             <NavLink to ="/calendar" style={{color: 'white'}}>Calendar</NavLink>
@@ -63,16 +68,16 @@ class NavBar extends Component<PropsItems, {}> {
                         Payment
                     </Menu.Item>
                 <Menu.Item icon={<LoginOutlined />}onClick={this.props.clearToken}>Logout</Menu.Item>
-                    
                 </Menu>
                 </Sider>
                 <Layout className="site-layout">
                 <Header className="site-layout-background" style={{ padding: 0, backgroundColor: '#183446'}} />
                 <Content style={{ margin: '0 16px' }}>
                     <Switch>
-                    <Route exact path = '/home'  component={() => <SignUp updateToken={this.props.updateToken}/>}/>
-                    </Switch>
+                    <Route  path = '/account'  component={() => <Auth updateToken={this.props.updateToken}/>}/>
+                    </Switch> 
                 </Content>
+                    {/* <Route path = '/calendar' component={() => <Calendar updateToken={this.props.updateToken}/>}/> */}
                 <Footer style={{ textAlign: 'center' }}>JB Home Remodeling Created by Daniel Buergler </Footer>
                 </Layout>
             </Layout>
@@ -85,7 +90,5 @@ class NavBar extends Component<PropsItems, {}> {
 
 export default NavBar;
 
-function showLogin(arg0: boolean) {
-    throw new Error('Function not implemented.');
-}
+
 
