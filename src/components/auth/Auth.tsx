@@ -18,10 +18,14 @@ class Auth extends Component<PropsItems, {}> {
     
 }
 
+// handleToggle = () => {
+//     this.setState(!this.state.showLogin);
+// }
+
 
     render() {
         return (
-            <div>
+            <div style={{backgroundColor:"#E2E2E2"}}>
                 <SignUp updateToken={this.props.updateToken}/>
                 <Login updateToken={this.props.updateToken}/>
             </div>

@@ -6,12 +6,13 @@ import APIURL from '../../helpers/environment';
 const {Option} = Select;
 
 const layout = {
-    lableCol: {span: 8},
+    lableCol: {span: 1},
     warpperCol: {span: 16},
+    width: {span:'50%'}
 };
 
 const tailLayout = {
-    wrapperCol: {offset: 4, span: 16},
+    wrapperCol: {offset: 4, span: 11},
 };
 
 
@@ -97,7 +98,7 @@ class SignUp extends Component<PropsItems, SignUpData>{
 
 render() {
     return (
-    <div>
+    <div style={{fontFamily: "Montserrat", textAlign: 'center', marginTop:'1%'}}>
         <h1>Sign Up</h1>
     <Form {...layout} onFinish={this.handleSubmit}>
     <Form.Item

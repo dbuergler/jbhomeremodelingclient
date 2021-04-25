@@ -3,7 +3,8 @@ import './App.css';
 import Auth from './components/auth/Auth';
 import Home from './components/home/Home';
 import NavBar from './components/home/NavBar';
-import {BrowserRouter} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
+import Footer from './components/home/Footer';
 
 
 
@@ -44,9 +45,12 @@ class App extends Component<{}, Token> {
   render(){
     return (
       <div>
-        <BrowserRouter>
         <NavBar clearToken={this.clearToken} updateToken={this.updateToken} />
-        </BrowserRouter>
+        <Switch>
+        <Route exact path ='/' component={Home}/>
+        <Route exact path = '/account' component={Auth} />
+        </Switch>
+        <Footer />
       </div> 
     );
   }
