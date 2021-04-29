@@ -1,14 +1,36 @@
-import React from 'react'
-import {ElementsConsumer, CardElement, useStripe, useElements} from '@stripe/react-stripe-js'
+// import React, {Component} from 'react'
+// import { CardElement, injectStripe, ReactStripeElements} from 'react-stripe-elements'
+// import APIURL from '../../helpers/environment';
 
-const PaymentForm = () => {
-    const stripe = useStripe();
-    const elements = useElements()
-
-    const handleSubmit = async (event: any) => {
-        event.preventDefualt();
-    }
+// interface PropsState {
     
+// }
+// interface PropsItems {
+//     updateToken: (newToken: string) => void,
+// }
+
+// class PaymentForm extends Component<PropsItems, any> {
+//     constructor(props:PropsItems){
+//         super(props);
+//         this.state = {
+
+//         }
+//     }
+//     render(){
+//         return(
+//             <h1>Form</h1>
+//         )
+//     }
+// }
+
+
+import React, { Component } from 'react'
+
+class PaymentForm extends Component {
+
 }
 
 export default PaymentForm;
+
+
+// export default injectStripe(PaymentForm);

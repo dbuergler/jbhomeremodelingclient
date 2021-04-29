@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-// import {GOOGLE_API_KEY, CALENDAR_ID} from '../config.js';
-
+import React, { Component } from 'react'
+import {Calendar} from 'antd';
+import CalendarForm from './CalendarForm'
 
 
 
@@ -8,38 +8,28 @@ type PropsItems = {
     updateToken: (newToken: string) => void,
 }
 
-class Calendar extends Component<PropsItems, {} >{
+class CalendarMain extends Component<PropsItems,{}>{
     constructor(props: PropsItems){
-        super(props)
+        super(props);
         this.state = {
-            events: []
+            
         }
     }
 
-//     getEvents(){
-//         let that = this;
-//   function start() {
-//     gapi.client.init({
-//       'apiKey': GOOGLE_API_KEY
-//     }).then(function() {
-//       return gapi.client.request({
-//         'path': `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events`,
-//       })
-//     }).then( (response) => {
-//       let events = response.result.items
-//       that.setState({
-//         events
-//       }, ()=>{
-//         console.log(that.state.events);
-//       })
-//     }, function(reason) {
-//       console.log(reason);
-//     });
-//   }
-//   gapi.load('client', start)
-// }
-//     }
+
+onPanelChange = (value: { format: (arg0: string) => any; }, mode: any) => {
+        console.log(value.format('YYYY-MM-DD'), mode);
+} 
+    render(){
+    return(
+        <div style={{fontFamily: "Montserrat"}}>
+            <CalendarForm updateToken={this.props.updateToken}/>
+            <Calendar onPanelChange={this.onPanelChange}/>
+        </div>
+    )
 }
 
 
-export default Calendar;
+}
+
+export default CalendarMain;

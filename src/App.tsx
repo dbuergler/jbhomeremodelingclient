@@ -5,6 +5,8 @@ import Home from './components/home/Home';
 import NavBar from './components/home/NavBar';
 import {Route, Switch} from "react-router-dom";
 import Footer from './components/home/Footer';
+// import Payment from './components/payments/Payment';
+import CalendarMain from './components/calendar/Calendar';
 
 
 
@@ -49,6 +51,8 @@ class App extends Component<{}, Token> {
         <Switch>
         <Route exact path ='/' component={Home}/>
         <Route exact path = '/account' component={Auth} />
+        {/* <Route exact path = '/payment' component={Payment} /> */}
+        <Route exact path = '/calendar' component={CalendarMain} />
         </Switch>
         <Footer />
       </div> 

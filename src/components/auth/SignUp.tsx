@@ -5,14 +5,9 @@ import APIURL from '../../helpers/environment';
 
 const {Option} = Select;
 
-const layout = {
-    lableCol: {span: 1},
-    warpperCol: {span: 16},
-    width: {span:'50%'}
-};
 
 const tailLayout = {
-    wrapperCol: {offset: 4, span: 11},
+    wrapperCol: {offset: 5, span: 11},
 };
 
 
@@ -100,7 +95,12 @@ render() {
     return (
     <div style={{fontFamily: "Montserrat", textAlign: 'center', marginTop:'1%'}}>
         <h1>Sign Up</h1>
-    <Form {...layout} onFinish={this.handleSubmit}>
+    <Form 
+    labelCol= {{span: 10}}
+    wrapperCol= {{offset: 9, span: 6}}
+    layout="horizontal"
+    style={{textAlign: 'center'}}
+    onFinish={this.handleSubmit}>
     <Form.Item
         name="first name"
         rules={[{ required: true, message: 'Please input your First Name!' }]}
@@ -126,7 +126,7 @@ render() {
     >
         <Input.Password onChange={this.handleChangePassword} type="password" name="password" placeholder="Password" />
     </Form.Item>
-        <Form.Item name="role" label="Role" rules={[{ required: true }]}>
+        <Form.Item name="role" rules={[{ required: true }]}>
         <Select
             onChange={this.handleChangeRole}
             placeholder="Select a Role"
