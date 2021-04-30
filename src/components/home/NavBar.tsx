@@ -11,14 +11,14 @@ AccountBookOutlined
 import {Link, NavLink} from 'react-router-dom';
 import Auth from '../auth/Auth';
 import Home from './Home';
-import Calendar from '../calendar/Calendar';
+import Calendar from '../calendar/CalendarTable';
 import { Header } from 'antd/lib/layout/layout';
 
 
 const { SubMenu } = Menu;
 
 type PropsItems ={
-    updateToken: (newToken: string) => void
+    updateToken: Function
     clearToken: () => void
 }
 
@@ -39,7 +39,8 @@ class NavBar extends Component<PropsItems, {}> {
             const { current } = this.state;
                 return (
                     <div id='navBar' style={{fontFamily: 'Montserrat', textAlign: 'center'}}>
-                    <Header style={{color: 'white', fontSize: '4em', backgroundColor: '#183446', textAlign: 'center', fontFamily: "Montserrat"}}>JB Home Remodeling</Header>
+                    <Header style={{color: 'white', fontSize: '4em', backgroundColor: '#183446', textAlign: 'center', fontFamily: "Montserrat"}}>JB Home Remodeling
+                    </Header>
                     <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal" style={{textAlign:"center", fontSize:'1.2em', backgroundColor:"#A5A58D", color:'#183446'}}>
                         <Menu.Item key="home" icon={<HomeOutlined />}>
                             <Link to="/">

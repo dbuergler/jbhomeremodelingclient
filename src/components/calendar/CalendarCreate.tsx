@@ -16,17 +16,18 @@ type CalendarData = {
     description: string,
     location: string,
     date: string,
-    projectId: string,
+    projectId: number,
 
 }
 
 type PropsItems = {
-    updateToken: (newToken: string) => void,
+    Token: string,
+    fetchCalendarIndex: () => void
 }
 
 
 
-class CalendarForm extends Component<PropsItems, CalendarData>{
+class CalendarCreate extends Component<PropsItems, CalendarData>{
     constructor(props: PropsItems){
         super(props);
         this.state = {
@@ -36,77 +37,68 @@ class CalendarForm extends Component<PropsItems, CalendarData>{
             description: '',
             location: '',
             date: '',
-            projectId: '',
+            projectId: 0,
         }
 
     }
 
-    handleSubmit = () => {
+    fetchCalendarCreate = () => {
         console.log('form submitted', this.state);
         const url = `${APIURL}/calendar/create`
         fetch(url, {
             method: 'POST',
             body: JSON.stringify({firstName: this.state.firstName, lastName: this.state.lastName, projectName: this.state.projectName, description: this.state.description, location: this.state.location, date: this.state.date, projectId: this.state.projectId }),
             headers: new Headers({
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: this.props.Token
             })
         }).then(
             (response) => response.json()
         ).then((data) => {
-            console.log(data.sessionToken, this.props)
-            this.props.updateToken(data.sessionToken)
+            console.log(data);
+            this.props.fetchCalendarIndex();
         })
 };
 
-// handleGet = () => {
-//     const url = `${APIURL}/calendar/`
-//     fetch(url, {
-//         method: 'GET',
-//         headers: new Headers({
-//             'Content-Type': 'application/json',
-//             'Authorization': 
-//         })
-//     })
-// }
 
-
-
-
+componentDidMount(){
+    this.fetchCalendarCreate();
+}
 
 
     render(){
         return(
             <div style={{fontFamily: "Montserrat", marginTop: '2%'}}>
                 <h2 style={{textAlign: 'center', textDecoration: 'underline'}}>Project Inquiry</h2>
-                
+                {/* {(localStorage.getItem('token'))} */}
                 <Form 
                 style={{textAlign: 'center'}}
                 labelCol={{ span: 9}}
-                wrapperCol={{ span: 6 }}
+                wrapperCol={{ span: 8 }}
                 layout="horizontal">
-                <Form.Item label="First Name">
-                <Input />
+                <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
+                <Input  placeholder="First Name"/>
                 </Form.Item>
-                <Form.Item label="Last Name">
-                <Input />
+                <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
+                <Input placeholder="Last Name" />
                 </Form.Item>
-                <Form.Item label="Project Name">
-                <Input />
+                <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
+                <Input placeholder="Project Name"/>
                 </Form.Item>
-                <Form.Item label="Description">
-                <Input.TextArea/>
+                <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
+                <Input.TextArea placeholder="Project Description"/>
                 </Form.Item>
-                <Form.Item label="Location">
-                <Input />
+                <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
+                <Input placeholder="Location"/>
                 </Form.Item>
-                <Form.Item label="Date">
-                <DatePicker />
+                <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
+                <DatePicker placeholder="Date"/>
                 </Form.Item>
-                <Form.Item label="ProjectId">
-                <InputNumber />
+                <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
+                <InputNumber placeholder="ProjectId" />
                 </Form.Item>
-                <Form.Item style={{textAlign: 'center'}} label= 'Button'>
-                <Button onClick={this.handleSubmit} style={{backgroundColor: '#183446', color: 'white'}}>Submit Button</Button>
+                <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
+                <Button onClick={this.fetchCalendarCreate} style={{backgroundColor: '#183446', color: 'white'}}>Submit Button</Button>
                 </Form.Item>
                 </Form>
             </div>
@@ -114,4 +106,4 @@ class CalendarForm extends Component<PropsItems, CalendarData>{
     }
 }
 
-export default CalendarForm;
+export default CalendarCreate;

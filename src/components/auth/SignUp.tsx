@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import React, {Component} from 'react';
 import {Form, Input, Button, Select} from 'antd';
 import APIURL from '../../helpers/environment';
 
@@ -21,10 +21,10 @@ type SignUpData = {
 }
 
 type PropsItems = {
-    updateToken: (newToken: string) => void,
+    updateToken: Function
 }
 
-class SignUp extends Component<PropsItems, SignUpData>{
+class SignUp extends React.Component<PropsItems, SignUpData>{
     constructor(props:PropsItems) {
         super(props);
         this.state = {
@@ -86,6 +86,7 @@ class SignUp extends Component<PropsItems, SignUpData>{
             (response) => response.json()
         ).then((data) => {
             console.log(data.sessionToken, this.props)
+            console.log(this.props.updateToken)
             this.props.updateToken(data.sessionToken)
         })
 };
@@ -93,7 +94,7 @@ class SignUp extends Component<PropsItems, SignUpData>{
 
 render() {
     return (
-    <div style={{fontFamily: "Montserrat", textAlign: 'center', marginTop:'1%'}}>
+    <div style={{fontFamily: "Montserrat", textAlign: 'center', padding: '5%'}}>
         <h1>Sign Up</h1>
     <Form 
     labelCol= {{span: 10}}
@@ -153,7 +154,7 @@ render() {
         }
         </Form.Item>
         <Form.Item {...tailLayout}>
-        <Button type="primary" style={{backgroundColor: '#183446'}} onClick={this.handleSubmit}>
+        <Button type="primary" style={{backgroundColor: '#183446', border: '5px', borderRadius: '5px', borderColor: 'white'}} onClick={this.handleSubmit}>
             Submit
         </Button>
         </Form.Item>

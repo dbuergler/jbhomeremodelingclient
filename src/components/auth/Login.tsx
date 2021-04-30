@@ -4,13 +4,10 @@ import APIURL from '../../helpers/environment';
 
 const {Option} = Select;
 
-const layout = {
-    lableCol: {span: 8},
-    warpperCol: {span: 16},
-};
+
 
 const tailLayout = {
-    wrapperCol: {offset: 4, span: 16},
+    wrapperCol: {offset: 5, span: 11},
 };
 
 
@@ -24,8 +21,7 @@ type LoginData = {
 }
 
 type PropsItems ={
-    updateToken: (newToken: string) => void
-    // randomFunction: (newToken: string) => void
+    updateToken: Function
 }
 
 
@@ -98,9 +94,14 @@ class Login extends Component<PropsItems, LoginData>{
 
 render() {
     return (
-    <div>
+    <div style={{fontFamily: "Montserrat", textAlign: 'center', padding: '5%'}}>
         <h1>Login</h1>
-    <Form {...layout} onFinish={this.handleSubmit}>
+    <Form 
+    labelCol= {{span: 10}}
+    wrapperCol= {{offset: 9, span: 6}}
+    layout="horizontal"
+    style={{textAlign: 'center'}}
+    onFinish={this.handleSubmit}>
     <Form.Item
         name="first name"
         rules={[{ required: true, message: 'Please input your First Name!' }]}
@@ -126,7 +127,7 @@ render() {
     >
         <Input.Password onChange={this.handleChangePassword} type="password" name="password" placeholder="Password" />
     </Form.Item>
-        <Form.Item name="role" label="Role" rules={[{ required: true }]}>
+        <Form.Item name="role" rules={[{ required: true }]}>
         <Select
             onChange={this.handleChangeRole}
             placeholder="Select a Role"
@@ -153,7 +154,7 @@ render() {
         }
         </Form.Item>
         <Form.Item {...tailLayout}>
-        <Button type="primary" style={{backgroundColor: '#183446'}} onClick={this.handleSubmit}>
+        <Button type="primary" style={{backgroundColor: '#183446', border: '5px', borderRadius: '5px', borderColor: 'white'}} onClick={this.handleSubmit}>
             Submit
         </Button>
         </Form.Item>
