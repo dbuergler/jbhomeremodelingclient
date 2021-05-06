@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import {Calendar} from 'antd';
-import APIURL from '../../helpers/environment';
+import {Calendar, Modal} from 'antd';
 import CalendarUpdate from './CalendarUpdate';
 import CalendarDelete from './CalendarDelete';
+import {InlineWidget} from 'react-calendly';
 
 
 
@@ -20,17 +20,6 @@ class CalendarTable extends Component<PropsItems,{}>{
         }
     }
 
-    fetchCalenderDelete = () => {
-        const url = `${APIURL}/calender/delete`
-        fetch(url, {
-            method: 'DELETE',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                Authorization: this.props.Token
-            })
-        })
-        .then(() => this.props.fetchCalendarIndex())
-    }
 
 
 onPanelChange = (value: { format: (arg0: string) => any; }, mode: any) => {
@@ -39,9 +28,12 @@ onPanelChange = (value: { format: (arg0: string) => any; }, mode: any) => {
     render(){
     return(
         <div style={{fontFamily: "Montserrat", textAlign: 'center', width: 'auto', height: '100vh'}}>
-            <Calendar  onPanelChange={this.onPanelChange}/>
-            <CalendarUpdate Token={this.props.Token} fetchCalendarIndex={this.props.fetchCalendarIndex}/>
-            <CalendarDelete Token={this.props.Token} fetchCalendarIndex={this.props.fetchCalendarIndex}/>
+            <h1 style={{margin: '2%', color: 'white', textDecoration: 'underline'}}>Calendly Meetings</h1>
+            <InlineWidget url="https://calendly.com/jbhomeremodeling421"/>
+            {/* <Calendar  onPanelChange={this.onPanelChange}/> */}
+            {/* <CalendarUpdate Token={this.props.Token} fetchCalendarIndex={this.props.fetchCalendarIndex}/>
+            <CalendarDelete Token={this.props.Token} fetchCalendarIndex={this.props.fetchCalendarIndex}/> */}
+
         </div>
     )
 }

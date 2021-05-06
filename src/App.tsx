@@ -11,6 +11,7 @@ import CalendarIndex from './components/calendar/CalendarIndex';
 // import ScrollUp from './components/home/ScrollUp';
 import {BackTop} from 'antd'
 import { UpCircleOutlined } from '@ant-design/icons';
+import ProjectsIndex from './components/projects/ProjectsIndex';
 
 
 
@@ -62,12 +63,13 @@ class App extends Component<{}, Token> {
         <Switch>
         <Route exact path ='/' component={Home}/>
         <Route exact path = '/account'><Auth updateToken={this.updateToken}/></Route> 
-        {/* <Route exact path = '/payment' component={Payment} /> */}
+        <Route exact path = '/projects' component={ProjectsIndex}/>
         <Route exact path = '/calendar' component={CalendarIndex} />
+        {/* <Route exact path = '/payment' component={Payment} /> */}
         </Switch>
         <Footer />
         <BackTop >
-          <div style={{fontFamily: 'Montserrat', backgroundColor: '#183446', color: 'white', height: '40px', width: '50px', lineHeight: '40px', textAlign: 'center', border: '5px', borderRadius: '5px', borderColor: 'white'}}>Up</div>
+          <div style={{fontFamily: 'Montserrat', backgroundColor: '#A5A58D', color: 'white', height: '40px', width: '50px', lineHeight: '40px', textAlign: 'center', border: '5px', borderRadius: '5px', borderColor: 'white'}}>Top</div>
         </BackTop>
       </div> 
     );

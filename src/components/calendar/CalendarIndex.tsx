@@ -54,8 +54,10 @@ class CalendarIndex extends Component<PropsItems, CalendarData> {
     render(){
         return(
             <div style={{fontFamily: "Montserrat"}} >
-                <CalendarCreate Token={this.props.Token} fetchCalendarIndex={this.fetchCalendarIndex}/>
-                <CalendarTable Token={this.props.Token} fetchCalendarIndex={this.fetchCalendarIndex} />
+                {/* <CalendarCreate Token={this.props.Token} fetchCalendarIndex={this.fetchCalendarIndex}/> */}
+                
+                <CalendarTable Token={this.props.Token} fetchCalendarIndex={this.fetchCalendarIndex} 
+                />
             </div>
         )    
     }

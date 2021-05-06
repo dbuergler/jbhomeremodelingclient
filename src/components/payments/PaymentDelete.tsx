@@ -3,10 +3,10 @@ import APIURL from '../../helpers/environment';
 
 type PropsItems = {
     Token: string,
-    fetchCalendarIndex: () => void
+    fetchPaymentIndex: () => void
 }
 
-class CalendarDelete extends Component<PropsItems>{
+class PaymentDelete extends Component<PropsItems, {}>{
     constructor(props: PropsItems){
         super(props);
         this.state = {
@@ -15,7 +15,7 @@ class CalendarDelete extends Component<PropsItems>{
     }
 
     fetchCalenderDelete = () => {
-        const url = `${APIURL}/calender/:id`
+        const url = `${APIURL}/payment/:id`
         fetch(url, {
             method: 'DELETE',
             headers: new Headers({
@@ -23,7 +23,7 @@ class CalendarDelete extends Component<PropsItems>{
                 Authorization: this.props.Token
             })
         })
-        .then(() => this.props.fetchCalendarIndex())
+        .then(() => this.props.fetchPaymentIndex())
     }
 
     render(){
@@ -31,8 +31,6 @@ class CalendarDelete extends Component<PropsItems>{
             <div></div>
         )
     }
-
-
 }
 
-export default CalendarDelete;
+export default PaymentDelete;

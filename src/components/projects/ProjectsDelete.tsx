@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import APIURL from '../../helpers/environment';
 
 type PropsItems = {
-    Token: string,
-    fetchCalendarIndex: () => void
+    Token: string;
+    fetchProjectIndex: () => void
 }
 
-class CalendarDelete extends Component<PropsItems>{
+
+class ProjectsDelete extends Component<PropsItems,{}>{
     constructor(props: PropsItems){
         super(props);
         this.state = {
@@ -15,7 +16,7 @@ class CalendarDelete extends Component<PropsItems>{
     }
 
     fetchCalenderDelete = () => {
-        const url = `${APIURL}/calender/:id`
+        const url = `${APIURL}/project/:id`
         fetch(url, {
             method: 'DELETE',
             headers: new Headers({
@@ -23,16 +24,17 @@ class CalendarDelete extends Component<PropsItems>{
                 Authorization: this.props.Token
             })
         })
-        .then(() => this.props.fetchCalendarIndex())
+        .then(() => this.props.fetchProjectIndex())
     }
 
     render(){
         return(
-            <div></div>
+            <div>
+                
+            </div>
         )
     }
-
-
 }
 
-export default CalendarDelete;
+export default ProjectsDelete;
+

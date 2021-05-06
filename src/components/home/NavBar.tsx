@@ -52,13 +52,11 @@ class NavBar extends Component<PropsItems, {}> {
                                 <NavLink to='/account'>Start Account</NavLink>
                             </Link>
                         </Menu.Item>
-                        <SubMenu key="user" icon={<UserOutlined/>} title="User">
-                            <Menu.Item key="projects" icon={<ProjectOutlined/>} style={{fontFamily:'Montserrat'}}>
+                        <Menu.Item key="projects" icon={<ProjectOutlined/>} style={{fontFamily:'Montserrat'}}>
                             <Link to="/projects">
                                 <NavLink to='/projects'>Projects</NavLink>
                             </Link>
-                            </Menu.Item>
-                        </SubMenu>
+                        </Menu.Item>
                         <Menu.Item key="calendar" icon={<CalendarOutlined/>}>
                         <Link to="/calendar">
                                 <NavLink to='/calendar'>Calendar</NavLink>

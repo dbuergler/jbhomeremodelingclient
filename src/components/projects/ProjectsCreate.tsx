@@ -1,35 +1,26 @@
+import { Button, DatePicker, Form, Input, InputNumber } from 'antd';
 import React, { Component } from 'react'
-import {
-    Form,
-    Input,
-    Button,
-    DatePicker,
-    InputNumber,
-    Modal
-} from 'antd';
 import APIURL from '../../helpers/environment';
 
 
-type CalendarData = {
+type ProjectData = {
     firstName: string,
     lastName: string,
     projectName: string,
     description: string,
     location: string,
     date: string,
-    projectId: number,
-
+    duration: string,
+    projectId: number
 }
 
 type PropsItems = {
-    Token: string,
-    fetchCalendarIndex: () => void
+    Token: string
+    fetchProjectIndex: () => void
 }
 
-
-
-class CalendarCreate extends Component<PropsItems, CalendarData>{
-    constructor(props: PropsItems){
+class ProjectsCreate extends Component<PropsItems, ProjectData>{
+    constructor(props:PropsItems){
         super(props);
         this.state = {
             firstName: '',
@@ -38,17 +29,16 @@ class CalendarCreate extends Component<PropsItems, CalendarData>{
             description: '',
             location: '',
             date: '',
-            projectId: 0,
+            duration: '',
+            projectId: 0
         }
-
     }
 
-    fetchCalendarCreate = () => {
-        console.log('form submitted', this.state);
-        const url = `${APIURL}/calendar/create`
-        fetch(url, {
+    fetchProjectCreate = () => {
+        const url =`${APIURL}/project/create`
+        fetch (url, {
             method: 'POST',
-            body: JSON.stringify({firstName: this.state.firstName, lastName: this.state.lastName, projectName: this.state.projectName, description: this.state.description, location: this.state.location, date: this.state.date, projectId: this.state.projectId }),
+            body: JSON.stringify({firstName: this.state.firstName, lastName: this.state.lastName, projectName: this.state.projectName, description: this.state.description, location: this.state.location, date: this.state.date,duration: this.state.duration, projectId: this.state.projectId}),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 Authorization: this.props.Token
@@ -57,24 +47,19 @@ class CalendarCreate extends Component<PropsItems, CalendarData>{
             (response) => response.json()
         ).then((data) => {
             console.log(data);
-            this.props.fetchCalendarIndex();
+            this.props.fetchProjectIndex();
         })
-};
+    }
 
-
-
-
-
-
-componentDidMount(){
-    this.fetchCalendarCreate();
-}
-
+    componentDidMount(){
+        this.fetchProjectCreate();
+    }
 
     render(){
         return(
-            <div style={{fontFamily: "Montserrat", marginTop: '2%'}}>
-                <h2 style={{textAlign: 'center', textDecoration: 'underline'}}>Project Inquiry</h2>
+            <div>
+                <div style={{fontFamily: "Montserrat", marginTop: '2%'}}/>
+                <h1 style={{textAlign: 'center', textDecoration: 'underline', color: 'white'}}>Project Inquiry</h1>
                 {/* {(localStorage.getItem('token'))} */}
                 <Form 
                 style={{textAlign: 'center'}}
@@ -103,12 +88,13 @@ componentDidMount(){
                 <InputNumber placeholder="ProjectId" />
                 </Form.Item>
                 <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
-                <Button onClick={this.fetchCalendarCreate} style={{backgroundColor: '#183446', color: 'white'}}>Submit Button</Button>
+                <Button onClick={this.fetchProjectCreate} style={{backgroundColor: '#183446', color: 'white'}}>Submit Button</Button>
                 </Form.Item>
                 </Form>
             </div>
         )
     }
+
 }
 
-export default CalendarCreate;
+export default ProjectsCreate;
