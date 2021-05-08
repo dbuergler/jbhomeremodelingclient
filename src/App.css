@@ -39,3 +39,9 @@
   }
 }
 
+.ant-card-head-title{
+  color: #183446;
+  text-align: center;
+  font-size: 1.2em;
+  font-family: 'Montserrat';
+}

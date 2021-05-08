@@ -32,19 +32,26 @@ class ProjectsIndex extends Component<PropsItems, ProjectData>{
             method:'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                Authorization: this.props.Token
+                Authorization: `${localStorage.getItem('token')}`
             })
+        }).then(
+            (response) => response.json()
+        ).then((projectData) => {
+            this.setState({
+                projectData: projectData
+            });
         })
-    }
+}
+    
 
-    componentDidMount(){
-        this.fetchProjectIndex();
+componentDidMount(){
+    this.fetchProjectIndex();
     }
 
 
     render(){
         return(
-            <div style={{fontFamily: "Montserrat"}}>
+            <div style={{fontFamily: "Montserrat", backgroundColor: '#8c8c8c', width: 'auto', height:'100vh'}}>
                 <ProjectsCreate Token={this.props.Token} fetchProjectIndex={this.fetchProjectIndex} />
                 <ProjectsTable Token={this.props.Token} fetchProjectIndex={this.fetchProjectIndex} projectData={this.state.projectData}/>
             </div>

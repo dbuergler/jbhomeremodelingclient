@@ -1,17 +1,19 @@
+import { Elements, ElementsConsumer } from '@stripe/react-stripe-js';
 import React, { Component } from 'react'
+import { Route } from 'react-router-dom';
 import APIURL from '../../helpers/environment';
-import StripeCheckout from 'react-stripe-checkout';
+import PaymentForm from './PaymentForm';
 
 
-type PaymentData = {
+
+
+interface PaymentData  {
     firstName: string,
     lastName: string,
     projectName: string,
     dateofpayment: string,
-    amount: number,
-
+    amount: string,
     
-
 }
 
 type PropsItems = {
@@ -20,6 +22,7 @@ type PropsItems = {
 }
 
 class PaymentCreate extends Component<PropsItems, PaymentData> {
+    
     constructor(props:PropsItems){
         super(props);
         this.state = {
@@ -27,7 +30,7 @@ class PaymentCreate extends Component<PropsItems, PaymentData> {
             lastName: '',
             projectName: '',
             dateofpayment: '',
-            amount: 0,
+            amount: '',
         }
     }
 
@@ -38,27 +41,28 @@ class PaymentCreate extends Component<PropsItems, PaymentData> {
             body: JSON.stringify({firstName: this.state.firstName, lastName: this.state.lastName, projectName: this.state.projectName, dateofpayment: this.state.dateofpayment, amout: this.state.amount}),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                Authorization: this.props.Token
+                Authorization: `${localStorage.getItem('token')}`
             })
         }).then(
             (response) => response.json()
-        ).then((data) => {
-            console.log(data);
-            this.props.fetchPaymentIndex();
-        })
-    }
-
-    componentDidMount(){
+            ).then((data) => {
+                console.log(data);
+                this.props.fetchPaymentIndex();
+            })
+        }
+        
+        
+    
+    
+        componentDidMount(){
         this.fetchPaymentCreate();
     }
-
-
-
 
 render(){
     
     return(
         <div>
+            
             
         </div>
         )

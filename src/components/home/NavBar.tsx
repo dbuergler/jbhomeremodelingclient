@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import {Menu} from 'antd';
+import {Button, Menu} from 'antd';
 import {
 HomeOutlined,
 CalendarOutlined,
 DollarCircleOutlined,
 ProjectOutlined,
 UserOutlined,
-AccountBookOutlined 
+AccountBookOutlined, 
+LogoutOutlined
 } from '@ant-design/icons';
 import {Link, NavLink} from 'react-router-dom';
 import Auth from '../auth/Auth';
@@ -41,7 +42,7 @@ class NavBar extends Component<PropsItems, {}> {
                     <div id='navBar' style={{fontFamily: 'Montserrat', textAlign: 'center'}}>
                     <Header style={{color: 'white', fontSize: '4em', backgroundColor: '#183446', textAlign: 'center', fontFamily: "Montserrat"}}>JB Home Remodeling
                     </Header>
-                    <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal" style={{textAlign:"center", fontSize:'1.2em', backgroundColor:"#A5A58D", color:'#183446'}}>
+                    <Menu onClick={this.handleClick} selectedKeys={[current]} mode="horizontal" style={{textAlign:"center", fontSize:'1.2em', backgroundColor:"#A5A58D", color:'#183446', }}>
                         <Menu.Item key="home" icon={<HomeOutlined />}>
                             <Link to="/">
                                 <NavLink to='/'>Home</NavLink>
@@ -66,6 +67,9 @@ class NavBar extends Component<PropsItems, {}> {
                         <Link to="/payment">
                                 <NavLink to='/payment'>Payment</NavLink>
                             </Link>
+                        </Menu.Item>
+                        <Menu.Item icon={<LogoutOutlined />}>
+                        <Link to='/' onClick={this.props.clearToken}>Logout</Link>
                         </Menu.Item>
                     </Menu>
                     </div>

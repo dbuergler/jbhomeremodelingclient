@@ -1,9 +1,11 @@
+import { Button } from 'antd';
 import React, { Component } from 'react'
 import APIURL from '../../helpers/environment';
 
 type PropsItems = {
     Token: string,
     fetchPaymentIndex: () => void
+    payments: number
 }
 
 class PaymentDelete extends Component<PropsItems, {}>{
@@ -14,13 +16,13 @@ class PaymentDelete extends Component<PropsItems, {}>{
         }
     }
 
-    fetchCalenderDelete = () => {
+    fetchPaymentDelete = () => {
         const url = `${APIURL}/payment/:id`
         fetch(url, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                Authorization: this.props.Token
+                Authorization: `${localStorage.getItem('token')}`
             })
         })
         .then(() => this.props.fetchPaymentIndex())
@@ -28,7 +30,11 @@ class PaymentDelete extends Component<PropsItems, {}>{
 
     render(){
         return(
-            <div></div>
+            <div>
+                <div>
+                <Button style={{backgroundColor: '#A5A58D', color: 'white', border: '1px solid white', borderRadius: '5px'}} onClick={this.fetchPaymentDelete}>Delete</Button>
+            </div>
+            </div>
         )
     }
 }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Form, Input, Button, Select} from 'antd';
+import {Form, Input, Button, Select, message, Alert} from 'antd';
 import APIURL from '../../helpers/environment';
 
 
@@ -91,11 +91,16 @@ class SignUp extends React.Component<PropsItems, SignUpData>{
         })
 };
     
+ success = () => {
+     message.success('Welcome to your next remodel!')
+ }
+
+
 
 render() {
     return (
     <div style={{fontFamily: "Montserrat", textAlign: 'center', padding: '5%'}}>
-        <h1>Sign Up</h1>
+        <h1 style={{color: 'white', textDecoration: 'underline'}}>Sign Up</h1>
     <Form 
     labelCol= {{span: 10}}
     wrapperCol= {{offset: 9, span: 6}}
@@ -154,9 +159,12 @@ render() {
         }
         </Form.Item>
         <Form.Item {...tailLayout}>
-        <Button type="primary" style={{backgroundColor: '#183446', border: '5px', borderRadius: '5px', borderColor: 'white'}} onClick={this.handleSubmit}>
+        <Button  style={{backgroundColor: '#183446', border: '1px solid white', borderRadius: '5px', color: 'white' }} onClick={this.handleSubmit}>
             Submit
         </Button>
+        
+
+        
         </Form.Item>
     </Form>
 </div>

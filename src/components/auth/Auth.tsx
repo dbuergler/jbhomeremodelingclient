@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SignUp from './SignUp';
 import Login from './Login';
 import {Button, Col} from 'antd'
+import {BrowserRouter as  Router } from 'react-router-dom';
 
 type AuthData = {
     showLogin: boolean;
@@ -30,10 +31,12 @@ handleToggle = () => {
     render() {
         console.log(this.props.updateToken)
         return (
-            <div style={{backgroundImage: `url(/gray-parquet.jpg)`, fontFamily: "Montserrat", textAlign: 'center', width: 'auto', height: '100vh'}}>
+            <div style={{backgroundColor: '#8c8c8c', fontFamily: "Montserrat", textAlign: 'center', width: 'auto', height: '100vh'}}>
+                <Router>
                 <Col >{this.state.showLogin === true ? <SignUp updateToken={this.props.updateToken}/> : <Login updateToken={this.props.updateToken}/> }
-                <Button style={{backgroundColor: '#183446', color: 'white', marginLeft: '10%', textAlign: 'center', bottom: '149px', border: '5px', borderRadius: '5px', borderColor: 'white' }} onClick={this.handleToggle}>Toggle</Button>
+                <Button style={{backgroundColor: '#183446', color: 'white', marginLeft: '10%', textAlign: 'center', bottom: '149px', border: '1px solid white', borderRadius: '5px'}} onClick={this.handleToggle}>Toggle</Button>
                 </Col>
+                </Router>
             </div>
         )
     }

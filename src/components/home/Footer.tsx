@@ -8,13 +8,10 @@ class Footer extends Component {
 
     render(){
         return(
-            <div style={{textAlign: 'center', fontFamily: "Montserrat", backgroundImage: `url(/gray-parquet.jpg)`}}>
-                <Divider style={{backgroundColor: '#183446', color:'white'}}>
-
-                <h3 style={{color: 'white'}}>JB Home Remodeling created by Daniel Buergler</h3> 
-                <p>Copyright &copy; 2021</p>
-                
-                </Divider>
+            <div style={{textAlign: 'center', fontFamily: "Montserrat"}}>
+                <h3 style={{color: 'white', backgroundColor: '#183446', padding: '3%'}}>JB Home Remodeling created by Daniel Buergler
+                <p style={{color: 'white', backgroundColor: '#183446'}}>Copyright &copy; 2021</p>
+                </h3> 
             </div>
         )
     }

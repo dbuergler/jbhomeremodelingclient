@@ -1,20 +1,35 @@
+import { Button } from 'antd';
 import React, { Component } from 'react'
 import APIURL from '../../helpers/environment';
+import {StripeProvider, Elements} from 'react-stripe-elements'
+import PaymentCreate from './PaymentCreate';
+import PaymentForm from './PaymentForm';
+import PaymentTable from './PaymentTable';
+
+
+
 
 
 type PaymentData = {
-    firstName: string,
-    lastName: string,
-    projectName: string,
-    dateofpayment: string,
-    amount: number,
-    data: []
+    address: string,
+    city: string,
+    state: string,
+    zipcode: string,
+    name: string,
+    amount: string,
+    paymentsData: []
     loaded: boolean
+    
+    
 
 }
 
 type PropsItems = {
     Token: string, 
+    fetchPaymentIndex: () => void
+    stripe: any
+    elements: any
+    
 }
 
 
@@ -22,13 +37,15 @@ class PaymentIndex extends Component<PropsItems, PaymentData> {
     constructor(props:PropsItems){
         super(props);
         this.state = {
-            firstName: '',
-            lastName: '',
-            projectName: '',
-            dateofpayment: '',
-            amount: 0,
-            data: [],
+            address: '',
+            city: '',
+            state: '',
+            zipcode: '',
+            name: '',
+            amount: '',
+            paymentsData: [],
             loaded: false
+            
         }
     }
 
@@ -38,31 +55,24 @@ class PaymentIndex extends Component<PropsItems, PaymentData> {
             method:'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                Authorization: this.props.Token
+                Authorization: `${localStorage.getItem('token')}`
             })
         })
     }
 
 
+    
+    
+
     componentDidMount(){
         this.fetchPaymentIndex();
-        let sqPaymentScript = document.createElement('script')
-        sqPaymentScript.src = "https://js.squareup.com/v2/paymentform";
-        sqPaymentScript.type = "text/javascript";
-    sqPaymentScript.async = false;
-    sqPaymentScript.onload = () => {
-    this.setState({
-        loaded: true
-    });
-    };
-    document.getElementsByTagName("head")[0].appendChild(sqPaymentScript);
 }
-
 
     render(){
         return(
             <div>
-                
+                <PaymentForm stripe={this.props.stripe} elements={this.props.elements}/>
+                <PaymentTable Token={this.props.Token} fetchPaymentIndex={this.fetchPaymentIndex} paymentsData={this.state.paymentsData}/>
             </div>
         )
     }

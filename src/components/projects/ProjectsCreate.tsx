@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Input, InputNumber } from 'antd';
+import { Button, Form, Input, InputNumber } from 'antd';
 import React, { Component } from 'react'
 import APIURL from '../../helpers/environment';
 
@@ -11,7 +11,7 @@ type ProjectData = {
     location: string,
     date: string,
     duration: string,
-    projectId: number
+    
 }
 
 type PropsItems = {
@@ -30,7 +30,7 @@ class ProjectsCreate extends Component<PropsItems, ProjectData>{
             location: '',
             date: '',
             duration: '',
-            projectId: 0
+            
         }
     }
 
@@ -38,18 +38,21 @@ class ProjectsCreate extends Component<PropsItems, ProjectData>{
         const url =`${APIURL}/project/create`
         fetch (url, {
             method: 'POST',
-            body: JSON.stringify({firstName: this.state.firstName, lastName: this.state.lastName, projectName: this.state.projectName, description: this.state.description, location: this.state.location, date: this.state.date,duration: this.state.duration, projectId: this.state.projectId}),
+            body: JSON.stringify({firstName: this.state.firstName, lastName: this.state.lastName, projectName: this.state.projectName, description: this.state.description, location: this.state.location, date: this.state.date,duration: this.state.duration}),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                Authorization: this.props.Token
+                Authorization: `${localStorage.getItem('token')}`
             })
         }).then(
             (response) => response.json()
-        ).then((data) => {
-            console.log(data);
+        ).then((projectData) => {
+            console.log(projectData);
             this.props.fetchProjectIndex();
         })
     }
+
+
+
 
     componentDidMount(){
         this.fetchProjectCreate();
@@ -61,34 +64,34 @@ class ProjectsCreate extends Component<PropsItems, ProjectData>{
                 <div style={{fontFamily: "Montserrat", marginTop: '2%'}}/>
                 <h1 style={{textAlign: 'center', textDecoration: 'underline', color: 'white'}}>Project Inquiry</h1>
                 {/* {(localStorage.getItem('token'))} */}
-                <Form 
+                <Form onFinish={this.fetchProjectCreate}
                 style={{textAlign: 'center'}}
                 labelCol={{ span: 9}}
                 wrapperCol={{ span: 8 }}
                 layout="horizontal">
                 <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
-                <Input  placeholder="First Name"/>
+                <Input  onChange={(e) => this.setState({firstName: e.target.value})} placeholder="First Name"/>
                 </Form.Item>
                 <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
-                <Input placeholder="Last Name" />
+                <Input onChange={(e) => this.setState({lastName: e.target.value})}placeholder="Last Name" />
                 </Form.Item>
                 <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
-                <Input placeholder="Project Name"/>
+                <Input onChange={(e) => this.setState({projectName: e.target.value})} placeholder="Project Name"/>
                 </Form.Item>
                 <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
-                <Input.TextArea placeholder="Project Description"/>
+                <Input.TextArea onChange={(e) => this.setState({description: e.target.value})}placeholder="Project Description"/>
                 </Form.Item>
                 <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
-                <Input placeholder="Location"/>
+                <Input onChange={(e) => this.setState({location: e.target.value})}placeholder="Location"/>
                 </Form.Item>
                 <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
-                <DatePicker placeholder="Date"/>
+                <Input onChange={(e) => this.setState({date: e.target.value})} type='date' name='date' placeholder="date placeholder"/>
                 </Form.Item>
                 <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
-                <InputNumber placeholder="ProjectId" />
+                <Input onChange={(e) => this.setState({duration: e.target.value})} placeholder="Duration" />
                 </Form.Item>
                 <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
-                <Button onClick={this.fetchProjectCreate} style={{backgroundColor: '#183446', color: 'white'}}>Submit Button</Button>
+                <Button htmlType='submit'  style={{backgroundColor: '#183446', color: 'white', border: '1px solid white', borderRadius: '5px'}}>Submit Button</Button>
                 </Form.Item>
                 </Form>
             </div>
