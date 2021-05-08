@@ -45,3 +45,7 @@
   font-size: 1.2em;
   font-family: 'Montserrat';
 }
+
+.ant-drawer-body {
+  background-color: #A5A58D;
+}

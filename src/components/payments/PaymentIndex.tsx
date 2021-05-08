@@ -71,7 +71,7 @@ class PaymentIndex extends Component<PropsItems, PaymentData> {
     render(){
         return(
             <div>
-                <PaymentForm stripe={this.props.stripe} elements={this.props.elements}/>
+                
                 <PaymentTable Token={this.props.Token} fetchPaymentIndex={this.fetchPaymentIndex} paymentsData={this.state.paymentsData}/>
             </div>
         )

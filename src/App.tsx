@@ -24,10 +24,10 @@ import {loadStripe} from '@stripe/stripe-js'
 type Token ={
   Token: string
   userRole: string
-
 }
 
-class App extends Component<{}, Token> { 
+class App extends Component<{}, Token> {
+  fetchPaymentIndex!: () => void;
   constructor(props: any){
     super(props)
     this.state={
@@ -36,14 +36,14 @@ class App extends Component<{}, Token> {
       
     }
   }
-
+  
   userRole = (role: string) => {
     localStorage.setItem('role', role)
     this.setState({
       userRole: role
     })
   }
-
+  
   updateToken = (Token : string, userRole: string) => {
     console.log("updateToken")
     localStorage.setItem('token', Token);
@@ -52,12 +52,13 @@ class App extends Component<{}, Token> {
     })
   };
 
+  
   stripePromise = loadStripe('pk_test_51IjyM9DDEirNYEmUo722uaBLZ9Jjy6NPE4ZKYRgpCAnIVYgQYZwF6q6bqRezaRntvOkJ1gdRU5V6dwa0QEPBhJES00RhXKr7nJ')
 
   InjectedCheckoutForm = () => (
     <ElementsConsumer>
         {({stripe, elements}) => (
-            <PaymentForm stripe={stripe} elements={elements}/>
+            <PaymentForm  stripe={stripe} elements={elements}/>
         )}
     </ElementsConsumer>
 )
@@ -69,7 +70,7 @@ class App extends Component<{}, Token> {
   
   protectedViews = () => {
     return (this.state.Token === localStorage.getItem('token') ? <Home token={this.state.Token}/>
-    : <Auth updateToken={this.updateToken}  />)
+    : <Auth updateToken={this.updateToken} clearToken={this.clearToken}  />)
   }
   render(){
     return (
@@ -78,10 +79,10 @@ class App extends Component<{}, Token> {
         <NavBar clearToken={this.clearToken} updateToken={this.updateToken} />
         <Switch>
         <Route exact path ='/' component={Home}/>
-        <Route exact path = '/account'><Auth updateToken={this.updateToken}/></Route> 
+        <Route exact path = '/account'><Auth updateToken={this.updateToken} clearToken={this.clearToken}/></Route> 
         <Route exact path = '/projects' component={ProjectsIndex}/>
         <Route exact path = '/calendar' component={CalendarIndex} />
-        <Route exact path = '/payment' component={PaymentIndex}> 
+        <Route exact path = '/payment'> 
         <Elements stripe={this.stripePromise}>
             <this.InjectedCheckoutForm/>
         </Elements>

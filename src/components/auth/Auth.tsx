@@ -3,6 +3,7 @@ import SignUp from './SignUp';
 import Login from './Login';
 import {Button, Col} from 'antd'
 import {BrowserRouter as  Router } from 'react-router-dom';
+import MyAccount from './MyAccount';
 
 type AuthData = {
     showLogin: boolean;
@@ -10,6 +11,7 @@ type AuthData = {
 
 type PropsItems = {
     updateToken: Function
+    clearToken: () => void
 }
 
 class Auth extends Component<PropsItems, AuthData> {
@@ -36,6 +38,7 @@ handleToggle = () => {
                 <Col >{this.state.showLogin === true ? <SignUp updateToken={this.props.updateToken}/> : <Login updateToken={this.props.updateToken}/> }
                 <Button style={{backgroundColor: '#183446', color: 'white', marginLeft: '10%', textAlign: 'center', bottom: '149px', border: '1px solid white', borderRadius: '5px'}} onClick={this.handleToggle}>Toggle</Button>
                 </Col>
+                <MyAccount updateToken={this.props.updateToken} clearToken={this.props.clearToken}/>
                 </Router>
             </div>
         )

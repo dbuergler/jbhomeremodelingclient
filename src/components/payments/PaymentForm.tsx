@@ -1,34 +1,52 @@
 import React, { Component } from 'react'
 import {CardElement, Elements, useElements, useStripe} from '@stripe/react-stripe-js'
 import {loadStripe} from '@stripe/stripe-js';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, InputNumber } from 'antd';
+import APIURL from '../../helpers/environment';
+import PaymentTable from './PaymentTable';
 
-type PaymentData = {
-    stripe: any,
-    elements: any,
-}
+
+
 
 type FormData ={
+    address: string,
+    city: string,
+    state: string,
+    zipcode: string,
+    name: string,
+    amount: string,
     displayForm: boolean,
     error: boolean
 }
 
 type PropsItems = {
-    Token: string,
-    fetchPaymentIndex: () => void
+    // Token: string, 
+    // fetchPaymentIndex: () => void
+    stripe: any,
+    elements: any,
 }
 
-class PaymentForm extends Component<PaymentData, FormData, PropsItems>{
-    constructor(props: PaymentData){
+class PaymentForm extends Component<PropsItems, FormData>{
+    constructor(props: PropsItems){
         super(props);
         this.state = ({
+            address: '',
+            city: '',
+            state: '',
+            zipcode: '',
+            name: '',
+            amount: '',
             displayForm: true,
             error: false
         })  
     }
 
-handleSubmit = async () => {
+
+
+
+handleSubmit = async (event: any) => {
     // event.preventDefault();
+
     console.log('On Submit')
     const {stripe, elements} = this.props;
     if (stripe) {
@@ -46,6 +64,11 @@ handleSubmit = async () => {
             })
         }
     }
+}
+
+
+onChange = (value: any) => {
+    console.log('changed', value);
 }
 
 
@@ -78,6 +101,10 @@ handleSubmit = async () => {
                     <Input placeholder="Name"/>
                     </Form.Item>
                     <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
+                    <InputNumber placeholder="Amount" formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    onChange={this.onChange} defaultValue={0} min={0}/>
+                    </Form.Item>
+                    <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
                         
                     <CardElement options={{
                                 iconStyle: 'solid',
@@ -99,6 +126,7 @@ handleSubmit = async () => {
                     </Form.Item>
                     <Button htmlType='submit'  style={{backgroundColor: '#183446', color: 'white', border: '1px solid white', borderRadius: '5px'}} disabled={!stripe}>Pay</Button>
                 </Form>
+                {/* <PaymentTable Token={this.props.Token} fetchPaymentIndex={this.fetchPaymentIndex} paymentsData={this.state.paymentsData}/> */}
                 <br></br>
                 <div style={{fontFamily: "Montserrat", textAlign: 'center', color: 'white'}} >
                     {!this.state.error ? <h2 style={{fontFamily: "Montserrat", textAlign: 'center', color: 'white'}}>Thank you for your business!</h2>
@@ -107,6 +135,10 @@ handleSubmit = async () => {
             </div>
         )
     }
-}
+} 
+
+
+
+
 
 export default PaymentForm;
