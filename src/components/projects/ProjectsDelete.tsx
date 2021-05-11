@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, notification } from 'antd';
 import React, { Component } from 'react'
 import APIURL from '../../helpers/environment';
 
@@ -29,8 +29,12 @@ class ProjectsDelete extends Component<PropsItems,{}>{
                 Authorization: `${localStorage.getItem('token')}`
             })
         })
-        .then(() => this.props.fetchProjectIndex())
-    }
+        .then(() => this.props.fetchProjectIndex());
+        notification.info({
+            message: 'Project Deleted!',
+            description: 'You have successfully deleted your project'
+        })
+    } 
 
     render(){
         return(

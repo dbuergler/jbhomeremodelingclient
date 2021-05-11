@@ -3,6 +3,7 @@ import { Button, Drawer, Form, Input, message, notification, Select } from 'antd
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import APIURL from '../../helpers/environment';
+import AccountDetails from './MyAccountDetails';
 
 const {Option} = Select;
 
@@ -15,6 +16,7 @@ type AccountData = {
     role: string,
     id: number
     visible: boolean
+    accountData: {}
 }
 
 type PropsItems ={
@@ -33,6 +35,7 @@ class MyAccount extends Component<PropsItems, AccountData>{
             role: '',
             id: 0,
             visible: false,
+            accountData: {}
             
         }
     }
@@ -65,7 +68,7 @@ class MyAccount extends Component<PropsItems, AccountData>{
                     role: data.users.role,
                 })
             })
-            .catch((err) => alert(err));
+            .catch((err) => (err));
         } 
     }
 
@@ -189,18 +192,18 @@ render(){
                 <Form.Item
                 name="first name"
                 rules={[{ required: true, message: 'Please input your First Name!' }]}>
-                <Input onChange={(e) => this.setState({firstName: e.target.value})} type ="firstName" name="first name" placeholder="First Name"  />
+                <Input value={this.state.firstName} onChange={(e) => this.setState({firstName: e.target.value})} type ="firstName" name="first name" placeholder="First Name"  />
                 </Form.Item>
                 <Form.Item
                 name="last name"
                 rules={[{ required: true, message: 'Please input your Last Name!' }]}>
-                <Input  onChange={(e) => this.setState({lastName: e.target.value})} type ="lastName" name="last name" placeholder="Last Name" />
+                <Input value={this.state.lastName} onChange={(e) => this.setState({lastName: e.target.value})} type ="lastName" name="last name" placeholder="Last Name" />
                 </Form.Item>
                 <Form.Item
                 name="username"
                 rules={[{ required: true, message: 'Please input your username!' }]}
                 >
-                <Input onChange={(e) => this.setState({username: e.target.value})}  type="username" name="username" placeholder="Username" />
+                <Input value={this.state.username} onChange={(e) => this.setState({username: e.target.value})}  type="username" name="username" placeholder="Username" />
                 </Form.Item>
                 <Form.Item name="role" rules={[{ required: true }]}>
                 <Select
@@ -222,7 +225,7 @@ render(){
                 label="Customize Gender"
                 rules={[{ required: true }]}
                 >
-                <Input type="role" />
+                <Input type="role"  value={this.state.role}/>
                 </Form.Item>
                 ) : null
                 }
@@ -234,6 +237,9 @@ render(){
                     Delete Account
                 </Button>
                 </Form>
+
+                <AccountDetails updateToken={this.props.updateToken} clearToken={this.props.clearToken} accountData={this.state.accountData}/>
+
             </Drawer>
         </div>
     )

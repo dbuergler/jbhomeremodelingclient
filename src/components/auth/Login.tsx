@@ -21,7 +21,8 @@ type LoginData = {
 }
 
 type PropsItems ={
-    updateToken: Function
+    updateToken: (newToken: string, userRole: string) => void
+
 }
 
 
@@ -87,7 +88,7 @@ class Login extends Component<PropsItems, LoginData>{
             (response) => response.json()
         ).then((data) => {
             console.log(data.sessionToken, this.props)
-            this.props.updateToken(data.sessionToken)
+            this.props.updateToken(data.sessionToken, data.user.role)
         })
 };
     

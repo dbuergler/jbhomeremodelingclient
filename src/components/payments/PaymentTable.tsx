@@ -76,9 +76,6 @@ class PaymentTable extends Component<PropsItems, PaymentData >{
     render(){
         return(
             <div>
-                <Button onClick={this.showDrawer}>
-                    Payment Details
-                </Button>
             <Drawer
             placement='right'
             closable={false}

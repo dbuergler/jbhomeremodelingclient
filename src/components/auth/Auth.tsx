@@ -10,7 +10,7 @@ type AuthData = {
 }
 
 type PropsItems = {
-    updateToken: Function
+    updateToken: (newToken: string, userRole: string) => void
     clearToken: () => void
 }
 

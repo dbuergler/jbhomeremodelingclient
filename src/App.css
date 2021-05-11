@@ -49,3 +49,40 @@
 .ant-drawer-body {
   background-color: #A5A58D;
 }
+
+
+.cards{
+  animation: fadeInAnimation ease 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+.title h1{
+  overflow: hidden;
+  border-right: .15em solid white;
+  white-space: nowrap;
+  margin: 0 auto;
+  animation:
+  typing 2s steps(25, end),
+    blink-caret .15s;
+}
+
+@keyframes typing {
+  from { width: 0}
+  to { width: 32% }
+}
+
+@keyframes blink-caret {
+  30% { border-color: transparent }
+  
+}
+

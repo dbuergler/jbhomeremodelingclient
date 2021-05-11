@@ -23,7 +23,8 @@ import {loadStripe} from '@stripe/stripe-js'
 
 type Token ={
   Token: string
-  userRole: string
+  userRole: string,
+  
 }
 
 class App extends Component<{}, Token> {
@@ -47,21 +48,22 @@ class App extends Component<{}, Token> {
   updateToken = (Token : string, userRole: string) => {
     console.log("updateToken")
     localStorage.setItem('token', Token);
+    this.userRole(userRole)
     this.setState({
       Token: Token
     })
   };
 
   
-  stripePromise = loadStripe('pk_test_51IjyM9DDEirNYEmUo722uaBLZ9Jjy6NPE4ZKYRgpCAnIVYgQYZwF6q6bqRezaRntvOkJ1gdRU5V6dwa0QEPBhJES00RhXKr7nJ')
+//   stripePromise = loadStripe('pk_test_51IjyM9DDEirNYEmUo722uaBLZ9Jjy6NPE4ZKYRgpCAnIVYgQYZwF6q6bqRezaRntvOkJ1gdRU5V6dwa0QEPBhJES00RhXKr7nJ')
 
-  InjectedCheckoutForm = () => (
-    <ElementsConsumer>
-        {({stripe, elements}) => (
-            <PaymentForm  stripe={stripe} elements={elements}/>
-        )}
-    </ElementsConsumer>
-)
+//   InjectedCheckoutForm = () => (
+//     <ElementsConsumer>
+//         {({stripe, elements}) => (
+//             <PaymentForm  stripe={stripe} elements={elements}/>
+//         )}
+//     </ElementsConsumer>
+// )
 
   clearToken = () => {
     localStorage.clear();
@@ -82,17 +84,13 @@ class App extends Component<{}, Token> {
         <Route exact path = '/account'><Auth updateToken={this.updateToken} clearToken={this.clearToken}/></Route> 
         <Route exact path = '/projects' component={ProjectsIndex}/>
         <Route exact path = '/calendar' component={CalendarIndex} />
-        <Route exact path = '/payment'> 
-        <Elements stripe={this.stripePromise}>
-            <this.InjectedCheckoutForm/>
-        </Elements>
-        </Route>
+        <Route exact path = '/payment' component={PaymentIndex} /> 
         </Switch>
+        </Router>
         <Footer />
         <BackTop >
           <div style={{fontFamily: 'Montserrat', backgroundColor: '#A5A58D', color: 'white', height: '40px', width: '50px', lineHeight: '40px', textAlign: 'center', border: '5px', borderRadius: '5px', borderColor: 'white'}}>Top</div>
         </BackTop>
-        </Router>
       </div> 
     );
   }

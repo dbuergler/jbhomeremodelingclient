@@ -1,4 +1,4 @@
-import { Button, Form, Input, Modal } from 'antd';
+import { Button, Form, Input, message, Modal, notification } from 'antd';
 import React, { Component } from 'react'
 import APIURL from '../../helpers/environment';
 import {ModalHeader, ModalBody} from 'reactstrap'
@@ -71,7 +71,11 @@ class ProjectsUpdate extends Component<PropsItems, ProjectData>{
         this.setState({loading: true});
         setTimeout(() => {
             this.setState({loading: false, visible: false});
-        }, 3000)
+        }, 1000)
+        notification.info({
+            message: 'Project Updated!',
+            description: "You have successfully updated your project"
+        })
     }
 
     handleCancel = () => {
@@ -85,37 +89,37 @@ class ProjectsUpdate extends Component<PropsItems, ProjectData>{
                     Update
                 </Button>
                 <Modal visible={this.state.visible} onOk={this.handleOk} onCancel={this.handleCancel}>
-                    <ModalHeader></ModalHeader>
+                    <ModalHeader style={{textAlign: 'center', textDecoration: 'underline', fontFamily: 'Montserrat', fontSize: '20px'}}>Update Project</ModalHeader>
                         <ModalBody>
                         <Form 
-                        style={{textAlign: 'center'}}
+                        style={{textAlign: 'center', fontFamily: 'Montserrat'}}
                         labelCol={{ span: 9}}
-                        wrapperCol={{ span: 8 }}
+                        wrapperCol={{ span: 15}}
                         layout="horizontal">
-                            <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
+                            <Form.Item style={{textAlign: 'center', marginLeft: '30%'}}>
                             <Input  onChange={(e) => this.setState({firstName: e.target.value})} placeholder="First Name"/>
                             </Form.Item>
-                            <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
+                            <Form.Item style={{textAlign: 'center', marginLeft: '30%'}}>
                             <Input onChange={(e) => this.setState({lastName: e.target.value})}placeholder="Last Name" />
                             </Form.Item>
-                            <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
+                            <Form.Item style={{textAlign: 'center', marginLeft: '30%'}}>
                             <Input onChange={(e) => this.setState({projectName: e.target.value})} placeholder="Project Name"/>
                             </Form.Item>
-                            <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
+                            <Form.Item style={{textAlign: 'center', marginLeft: '30%'}}>
                             <Input.TextArea onChange={(e) => this.setState({description: e.target.value})}placeholder="Project Description"/>
                             </Form.Item>
-                            <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
+                            <Form.Item style={{textAlign: 'center', marginLeft: '30%'}}>
                             <Input onChange={(e) => this.setState({location: e.target.value})}placeholder="Location"/>
                             </Form.Item>
-                            <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
+                            <Form.Item style={{textAlign: 'center', marginLeft: '30%'}}>
                             <Input onChange={(e) => this.setState({date: e.target.value})} type='date' name='date' placeholder="date placeholder"/>
                             </Form.Item>
-                            <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}>
+                            <Form.Item style={{textAlign: 'center', marginLeft: '30%'}}>
                             <Input onChange={(e) => this.setState({duration: e.target.value})} placeholder="Duration" />
                             </Form.Item>
                         </Form>
-                            <Button key='back' onClick={this.handleCancel}>Close</Button>
-                            <Button key='submit' loading={this.state.loading} onClick={this.handleOk}>Submit</Button>
+                            {/* <Button key='back' onClick={this.handleCancel}>Close</Button>
+                            <Button key='submit' loading={this.state.loading} onClick={this.handleOk}>Submit</Button> */}
                         </ModalBody>
                 </Modal>
                     

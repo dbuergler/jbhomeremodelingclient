@@ -27,7 +27,7 @@ class ProjectsIndex extends Component<PropsItems, ProjectData>{
     }
 
     fetchProjectIndex = () => {
-        const url = `${APIURL}/project/`
+        const url = `${APIURL}/project/${this.state.projectId}`
         fetch(url, {
             method:'GET',
             headers: new Headers({

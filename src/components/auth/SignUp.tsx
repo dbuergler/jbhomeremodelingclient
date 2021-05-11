@@ -21,7 +21,7 @@ type SignUpData = {
 }
 
 type PropsItems = {
-    updateToken: Function
+    updateToken: (newToken: string, userRole: string) => void
 }
 
 class SignUp extends React.Component<PropsItems, SignUpData>{
@@ -87,12 +87,12 @@ class SignUp extends React.Component<PropsItems, SignUpData>{
         ).then((data) => {
             console.log(data.sessionToken, this.props)
             console.log(this.props.updateToken)
-            this.props.updateToken(data.sessionToken)
+            this.props.updateToken(data.sessionToken, data.user.role)
         })
 };
     
  success = () => {
-     message.success('Welcome to your next remodel!')
+    message.success('Welcome to your next remodel!')
  }
 
 
