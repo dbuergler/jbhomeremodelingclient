@@ -20,7 +20,7 @@ type AccountData = {
 }
 
 type PropsItems ={
-    updateToken: Function
+    updateToken: (newToken: string, userRole: string) => void
     clearToken: () => void
 }
 
@@ -47,7 +47,7 @@ class MyAccount extends Component<PropsItems, AccountData>{
 
 //ADMIN ONLY//
     fetchUser = () => {
-        if(this.props.updateToken){
+        
             const url = `${APIURL}/user/`
             fetch(url, {
                 method:'GET',
@@ -70,10 +70,10 @@ class MyAccount extends Component<PropsItems, AccountData>{
             })
             .catch((err) => (err));
         } 
-    }
+
 
     editUser = () => {
-        if(this.props.updateToken){
+        
             const url = `${APIURL}/user/update/${this.state.id}`
             fetch(url, {
                 method: 'PUT',
@@ -100,14 +100,12 @@ class MyAccount extends Component<PropsItems, AccountData>{
             })
             .catch((err) => console.log("error", err));
     
-    }
-
-        }
+}
 
 //ADMIN ONLY//
 
 handleGetID = () => {
-    if(this.props.updateToken){
+    
         const url = `${APIURL}/user/${this.state.id}`
             fetch(url, {
                 method:'GET',
@@ -130,10 +128,10 @@ handleGetID = () => {
             })
             // .catch((err) => alert(err));
     }
-}
+
 
 handleDelete = () => {
-    if(this.props.updateToken){
+    
         const url = `${APIURL}/user/delete/${this.state.id}`
         fetch(url, {
             method: "DELETE",
@@ -153,7 +151,6 @@ handleDelete = () => {
         .catch((err) => console.log("error", err));
     
         }
-    }
 
     showDrawer = () => {
         this.setState({
