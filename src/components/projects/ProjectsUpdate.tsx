@@ -56,9 +56,6 @@ class ProjectsUpdate extends Component<PropsItems, ProjectData>{
         })
     }
 
-    componentDidMount(){
-        this.fetchProjectUpdate();
-    }
 
 
     showModal = () => {

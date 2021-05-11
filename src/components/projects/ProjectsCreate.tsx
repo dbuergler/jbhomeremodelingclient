@@ -34,11 +34,13 @@ class ProjectsCreate extends Component<PropsItems, ProjectData>{
         }
     }
 
-    fetchProjectCreate = () => {
+    fetchProjectCreate = (event: any ) => {
+        // event.preventDefault();
+        console.log(this.state)
         const url =`${APIURL}/project/create`
         fetch (url, {
             method: 'POST',
-            body: JSON.stringify({firstName: this.state.firstName, lastName: this.state.lastName, projectName: this.state.projectName, description: this.state.description, location: this.state.location, date: this.state.date,duration: this.state.duration}),
+            body: JSON.stringify({firstName: this.state.firstName, lastName: this.state.lastName, projectName: this.state.projectName, description: this.state.description, location: this.state.location, date: this.state.date, duration: this.state.duration}),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 Authorization: `${localStorage.getItem('token')}`
@@ -61,7 +63,7 @@ class ProjectsCreate extends Component<PropsItems, ProjectData>{
                 <div style={{fontFamily: "Montserrat", marginTop: '2%'}}/>
                 <h1 style={{textAlign: 'center', textDecoration: 'underline', color: 'white'}}>Project Inquiry</h1>
                 {/* {(localStorage.getItem('token'))} */}
-                <Form onFinish={this.fetchProjectCreate}
+                <Form onFinish={(event) => this.fetchProjectCreate(event)}
                 style={{textAlign: 'center'}}
                 labelCol={{ span: 9}}
                 wrapperCol={{ span: 8 }}

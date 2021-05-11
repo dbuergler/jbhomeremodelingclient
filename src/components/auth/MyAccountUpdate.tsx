@@ -64,10 +64,6 @@ class UpdateAccount extends Component<PropsItems, AccountData>{
 
     }
 
-    componentDidMount(){
-        this.editUser();
-    }
-
     render(){
         return(
             <div>
