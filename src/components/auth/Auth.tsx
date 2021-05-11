@@ -38,7 +38,7 @@ handleToggle = () => {
                 <Col >{this.state.showLogin === true ? <SignUp updateToken={this.props.updateToken}/> : <Login updateToken={this.props.updateToken}/> }
                 <Button style={{backgroundColor: '#183446', color: 'white', marginLeft: '10%', textAlign: 'center', bottom: '149px', border: '1px solid white', borderRadius: '5px'}} onClick={this.handleToggle}>Toggle</Button>
                 </Col>
-                <MyAccount updateToken={this.props.updateToken} clearToken={this.props.clearToken}/>
+                <MyAccount updateToken={this.props.updateToken}/>
                 </Router>
             </div>
         )

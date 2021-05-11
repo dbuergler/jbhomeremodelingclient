@@ -72,19 +72,19 @@ render(){
                         wrapperCol={{ span: 8}}
                         layout="horizontal">
             <h1 style={{textAlign: 'center', textDecoration: 'underline', color: 'white', fontFamily: "Montserrat"}}>Billing Address</h1>
-                    <Form.Item style={{textAlign: 'center', marginLeft: '40%'}} required>
+                    <Form.Item style={{textAlign: 'center', marginLeft: '40%'}}  rules={[{ required: true, message: 'Please input your address!' }]}>
                     <Input placeholder="Address"/>
                     
                     </Form.Item>
-                    <Form.Item style={{textAlign: 'center', marginLeft: '40%'}} required>
+                    <Form.Item style={{textAlign: 'center', marginLeft: '40%'}} rules={[{ required: true, message: 'Please input your city!' }]}>
                     <Input placeholder="City"/>
                     
                     </Form.Item>
-                    <Form.Item style={{textAlign: 'center', marginLeft: '40%'}} required>
+                    <Form.Item style={{textAlign: 'center', marginLeft: '40%'}} rules={[{ required: true, message: 'Please input your state!' }]}>
                     <Input placeholder="State"/>
                     
                     </Form.Item>
-                    <Form.Item style={{textAlign: 'center', marginLeft: '40%'}} required>
+                    <Form.Item style={{textAlign: 'center', marginLeft: '40%'}} rules={[{ required: true, message: 'Please input your zipcode!' }]}>
                     <Input placeholder='ZipCode'/>
                     </Form.Item>
             </Form>

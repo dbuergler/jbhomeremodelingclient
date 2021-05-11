@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {CardElement, ElementsConsumer} from '@stripe/react-stripe-js'
-import { Form, Input, InputNumber, notification } from 'antd';
+import { Alert, Button, Form, Input, InputNumber, notification } from 'antd';
 import PaymentCard from './PaymentCard';
 
 
@@ -25,15 +25,16 @@ handleSubmit = async (event: {preventDefault: () => void}) => {
         console.log(result.error.message)
     } else {
         console.log(result.token)
+        notification.info({
+            message: "You have successfully paid!"
+        })
     }
-    notification.info({
-        message: 'You have successfully paid'
-    })
 }        
         
 onChange = (value: any) => {
     console.log('changed', value);
 }
+
 
 
     render(){;
@@ -42,11 +43,11 @@ onChange = (value: any) => {
                     <form onSubmit={this.handleSubmit}>
                     <h1 style={{textAlign: 'center', textDecoration: 'underline', color: 'white', fontFamily: "Montserrat"}}>Payment Details</h1>
                     <Form.Item style={{textAlign: 'center', marginLeft: '40%', fontFamily: 'Montserrat'}} labelCol={{ span: 9}}
-                        wrapperCol={{ span: 8}}>
+                        wrapperCol={{ span: 8}} rules={[{ required: true, message: 'Please input your name!' }]}>
                     <Input placeholder="Name"/>
                     </Form.Item>
                     <Form.Item style={{textAlign: 'center', marginLeft: '40%', fontFamily: 'Montserrat'}} labelCol={{ span: 9}}
-                        wrapperCol={{ span: 8}}>
+                        wrapperCol={{ span: 8}} rules={[{ required: true, message: 'Please input your amount!' }]}>
                     <InputNumber placeholder="Amount" formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                     onChange={this.onChange} defaultValue={0} min={0}/>
                     </Form.Item>
@@ -54,7 +55,9 @@ onChange = (value: any) => {
                         wrapperCol={{ span: 8}}>
                         <PaymentCard />
                     <br></br>
-                    <button style={{backgroundColor: '#183446', color: 'white', border: '1px solid white', borderRadius: '5px', textAlign: 'center'}} disabled={!this.props.stripe}>Pay</button>
+                    <button  style={{backgroundColor: '#183446', color: 'white', border: '1px solid white', borderRadius: '5px', textAlign: 'center'}} disabled={!this.props.stripe}>Pay
+                    </button>
+
                     </Form.Item>
                     </form>
                 <br></br>

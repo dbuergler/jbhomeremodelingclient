@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import DeleteAccount from './MyAccountDelete';
+import UpdateAccount from './MyAccountUpdate';
+
+
 
 type AccountData = {
     firstName: string,
@@ -7,11 +11,11 @@ type AccountData = {
     password: string,
     role: string,
     id: number
+    
 }
 
 type PropsItems ={
     updateToken: (newToken: string, userRole: string) => void
-    clearToken: () => void
     accountData: any
 }
 
@@ -26,28 +30,35 @@ class AccountDetails extends Component<PropsItems, AccountData>{
                 password: '',
                 role: '',
                 id: 0,
+                
 
         }
     }
 
-    // componentDidMount(){
-    //     this.accountMapper()
-    // }
+    componentDidMount(){
+        this.accountMapper()
+    }
 
-// accountMapper = () => {
-//     return this.props.accountData.map((accounts:AccountData, index: number) => {
-//         return(
-//             <tr style={{border: '1px solid white', borderCollapse: 'collapse'}} key={index}>
-//             <th scope='row'>{accounts.id}</th>
-//                     <td>{accounts.firstName}</td>
-//                     <td>{accounts.lastName}</td> 
-//                     <td>{accounts.username}</td>
-//                     <td>{accounts.password}</td>
-//                     <td>{accounts.role}</td>
-//             </tr>
-//             )
-//         })
-//     }
+accountMapper = () => {
+    return this.props.accountData.map((accounts:AccountData, index: number) => {
+        return(
+            <tr style={{border: '1px solid white', borderCollapse: 'collapse'}} key={index}>
+            <th scope='row'>{accounts.id}</th>
+                    <td>{accounts.firstName}</td>
+                    <td>{accounts.lastName}</td> 
+                    <td>{accounts.username}</td>
+                    <td>{accounts.password}</td>
+                    <td>{accounts.role}</td>
+                    <td>
+                    <UpdateAccount updateToken={this.props.updateToken}  accounts={accounts.id}/>
+                    </td>
+                    <td>
+                    <DeleteAccount updateToken={this.props.updateToken}  accounts={accounts.id}/>
+                    </td>
+            </tr>
+            )
+        })
+    }
 
     render(){
         console.log(this.props.accountData)
@@ -62,11 +73,14 @@ class AccountDetails extends Component<PropsItems, AccountData>{
                     <th style={{border: '1px solid white', textAlign: 'center', }}>First Name</th>
                     <th style={{border: '1px solid white', textAlign: 'center', }}>Last Name</th>
                     <th style={{border: '1px solid white', textAlign: 'center', }}>Username</th>
+                    <th style={{border: '1px solid white', textAlign: 'center', }}>Password</th>
                     <th style={{border: '1px solid white', textAlign: 'center', }}>Role</th>
+                    <th style={{border: '1px solid white', textAlign: 'center', }}>Update</th>
+                    <th style={{border: '1px solid white', textAlign: 'center', }}>Delete</th>
                 </tr>
                 </thead>
                 <tbody>
-                {/* {this.accountMapper()} */}
+                {this.accountMapper()}
                 </tbody>
             </table>
         </div> 

@@ -19,12 +19,14 @@ type AccountData = {
     accountData: {}
 }
 
+interface DataMap  {
+    accountData: AccountData[]
+}
 type PropsItems ={
     updateToken: (newToken: string, userRole: string) => void
-    clearToken: () => void
 }
 
-class MyAccount extends Component<PropsItems, AccountData>{
+class MyAccount extends Component<PropsItems, AccountData, DataMap>{
     constructor(props:PropsItems){
         super(props);
         this.state = {
@@ -35,7 +37,7 @@ class MyAccount extends Component<PropsItems, AccountData>{
             role: '',
             id: 0,
             visible: false,
-            accountData: {}
+            accountData: []
             
         }
     }
@@ -47,7 +49,7 @@ class MyAccount extends Component<PropsItems, AccountData>{
 
 //ADMIN ONLY//
     fetchUser = () => {
-        
+            console.log('I am here')
             const url = `${APIURL}/user/`
             fetch(url, {
                 method:'GET',
@@ -60,47 +62,14 @@ class MyAccount extends Component<PropsItems, AccountData>{
                     // throw new Error("Error");
                 } else return res.json();
             }).then((data) => {
-                console.log("User", data.users);
+                console.log("User", data);
                 this.setState({ 
-                    firstName: data.users.firstName,
-                    lastName: data.users.lastName,
-                    username: data.users.username,
-                    role: data.users.role,
+                    accountData: data
                 })
             })
             .catch((err) => (err));
         } 
 
-
-    editUser = () => {
-        
-            const url = `${APIURL}/user/update/${this.state.id}`
-            fetch(url, {
-                method: 'PUT',
-                body: JSON.stringify({firstName: this.state.firstName,lastName: this.state.lastName,username: this.state.username, password: this.state.password, role: this.state.role }),
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                    Authorization: `${localStorage.getItem('token')}`
-                })
-            }) 
-            .then((res) => {
-                if (res.status !== 200) {
-                    res.json().then(err => { alert(err.error) })
-                    // throw new Error("fetch error");
-                }
-                else {
-                    console.log("User edited successfully")
-                    notification.open({
-                        message: 'Account Updated!',
-                        description: 'Your Account has been successfully updated!'
-                    })
-                    
-    
-                }
-            })
-            .catch((err) => console.log("error", err));
-    
-}
 
 //ADMIN ONLY//
 
@@ -130,27 +99,6 @@ handleGetID = () => {
     }
 
 
-handleDelete = () => {
-    
-        const url = `${APIURL}/user/delete/${this.state.id}`
-        fetch(url, {
-            method: "DELETE",
-                headers: new Headers({
-                    "Content-Type": "application/json",
-                    Authorization: `${localStorage.getItem('token')}`
-                }),
-        }) 
-        .then((res) => {
-            console.log("User deleted")
-            this.props.clearToken();
-            notification.open({
-                message: 'Account Deleted!',
-                description: 'Your Account has been successfully deleted!'
-            })
-        })
-        .catch((err) => console.log("error", err));
-    
-        }
 
     showDrawer = () => {
         this.setState({
@@ -171,13 +119,13 @@ render(){
     const { visible } = this.state;
     return(
         <div style={{fontFamily: "Montserrat", textAlign: 'center'}}>
-            <Button icon={<UserOutlined />}onClick={this.showDrawer} style={{backgroundColor: '#183446', border: '1px solid white', borderRadius: '5px', color: 'white'}}>My Account</Button>
+            <Button  icon={<UserOutlined />}onClick={this.showDrawer} style={{backgroundColor: '#183446', border: '1px solid white', borderRadius: '5px', color: 'white'}}>My Account</Button>
 
             <Drawer
             closable={false}
             onClose={this.onClose}
             visible={visible}
-            width={720}
+            width={1000}
             style={{ position: 'absolute' }}>
                 <h1 style={{color: 'white', textDecoration: 'underline', textAlign:'center', fontFamily: "Montserrat"}}>My Account</h1>
                 <Form 
@@ -200,7 +148,13 @@ render(){
                 name="username"
                 rules={[{ required: true, message: 'Please input your username!' }]}
                 >
+                    <Form.Item
+                name="username"
+                rules={[{ required: true, message: 'Please input your password!' }]}
+                >
                 <Input value={this.state.username} onChange={(e) => this.setState({username: e.target.value})}  type="username" name="username" placeholder="Username" />
+                </Form.Item>
+                <Input.Password value={this.state.password} onChange={(e) => this.setState({password: e.target.value})}  type="password" name="password" placeholder="Password" />
                 </Form.Item>
                 <Form.Item name="role" rules={[{ required: true }]}>
                 <Select
@@ -227,15 +181,9 @@ render(){
                 ) : null
                 }
                 </Form.Item>
-                <Button style={{backgroundColor: '#183446', border: '1px solid white', borderRadius: '5px', color: 'white'}} onClick={this.editUser}>
-                    Save Changes
-                </Button>
-                <Button style={{backgroundColor: '#183446', border: '1px solid white', borderRadius: '5px', color: 'white'}} onClick={this.handleDelete}>
-                    Delete Account
-                </Button>
                 </Form>
 
-                <AccountDetails updateToken={this.props.updateToken} clearToken={this.props.clearToken} accountData={this.state.accountData}/>
+                <AccountDetails updateToken={this.props.updateToken}  accountData={this.state.accountData}/>
 
             </Drawer>
         </div>
