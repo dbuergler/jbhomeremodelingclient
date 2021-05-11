@@ -19,7 +19,7 @@ type ProjectData = {
 type PropsItems = {
     Token: string
     fetchProjectIndex: () => void,
-    projectData: any
+    projectData: []
 }
 
 class ProjectsTable extends Component<PropsItems, ProjectData > {
