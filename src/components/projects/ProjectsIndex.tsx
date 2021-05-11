@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import APIURL from '../../helpers/environment';
 import ProjectsCreate from './ProjectsCreate';
+import ProjectsGetAll from './ProjectsGetAll';
 import ProjectsTable from './ProjectsTable';
 
 
@@ -52,12 +53,17 @@ componentDidMount(){
     render(){
         return(
             <div style={{fontFamily: "Montserrat", backgroundColor: '#8c8c8c', width: 'auto', height:'100vh'}}>
-                <ProjectsCreate Token={this.props.Token} fetchProjectIndex={this.fetchProjectIndex} />
-                <ProjectsTable Token={this.props.Token} fetchProjectIndex={this.fetchProjectIndex} projectData={this.state.projectData}/>
+                {(localStorage.getItem('role') === 'Admin') ?
+                <div>
+                <ProjectsGetAll Token={this.props.Token} fetchProjectIndex={this.fetchProjectIndex}/> 
+                </div> :
+                <div>
+                    <ProjectsCreate Token={this.props.Token} fetchProjectIndex={this.fetchProjectIndex} /> 
+                    <ProjectsTable Token={this.props.Token} fetchProjectIndex={this.fetchProjectIndex} projectData={this.state.projectData}/> 
+                </div> }
             </div>
         )
     }
-
 
 }
 

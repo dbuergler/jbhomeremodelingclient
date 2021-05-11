@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import APIURL from '../../helpers/environment';
+import ProjectsTable from './ProjectsTable';
 
 type ProjectData = {
     duration: string,
@@ -47,9 +48,13 @@ class ProjectsGetAll extends Component<PropsItems, ProjectData>{
         }
 
     render(){
-        return{
+        return(
+
+            <ProjectsTable Token={this.props.Token} fetchProjectIndex={this.fetchProjectIndex} projectData={this.state.projectData}/>
+        )
             
-        }
+            
+        
     }
 
 }
