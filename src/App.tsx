@@ -19,7 +19,7 @@ import PaymentForm from './components/payments/PaymentForm';
 import {loadStripe} from '@stripe/stripe-js'
 
 
-
+//const
 
 type Token ={
   Token: string
