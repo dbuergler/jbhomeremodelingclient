@@ -98,7 +98,7 @@ class ProjectsTable extends Component<PropsItems, ProjectData > {
             </div>
         )
     }
-
+//const
 }
 
 export default ProjectsTable;
