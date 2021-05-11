@@ -59,7 +59,7 @@ class ProjectsTable extends Component<PropsItems, ProjectData > {
                     <td>
                         <ProjectsUpdate Token={this.props.Token} fetchProjectIndex={this.props.fetchProjectIndex} projects={projects.id}/>
                     </td>
-                     
+                    
                     <td>
                         <ProjectsDelete Token={this.props.Token} fetchProjectIndex={this.props.fetchProjectIndex} projects={projects.id}/>
                     </td>

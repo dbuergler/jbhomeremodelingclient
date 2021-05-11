@@ -3,6 +3,7 @@ import { Button, Drawer, Form, Input, message, notification, Select } from 'antd
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import APIURL from '../../helpers/environment';
+import AccountUser from './MyAccountbyUser';
 import AccountDetails from './MyAccountDetails';
 
 const {Option} = Select;
@@ -26,7 +27,7 @@ type PropsItems ={
     updateToken: (newToken: string, userRole: string) => void
 }
 
-class MyAccount extends Component<PropsItems, AccountData, DataMap>{
+class AccountID extends Component<PropsItems, AccountData, DataMap>{
     constructor(props:PropsItems){
         super(props);
         this.state = {
@@ -43,62 +44,32 @@ class MyAccount extends Component<PropsItems, AccountData, DataMap>{
     }
 
     componentDidMount(){
-        this.fetchUser()
+        this.handleGetID()
     }
 
 
-//ADMIN ONLY//
-    fetchUser = () => {
-            console.log('I am here')
-            const url = `${APIURL}/user/`
-            fetch(url, {
-                method:'GET',
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                    Authorization: `${localStorage.getItem('token')}`
-                })
-            }).then((res) => {
-                if (res.status !== 200) {
-                    // throw new Error("Error");
-                } else return res.json();
-            }).then((data) => {
-                console.log("User", data);
-                this.setState({ 
-                    accountData: data
-                })
-            })
-            .catch((err) => (err));
-        } 
-
-
-//ADMIN ONLY//
 
 handleGetID = () => {
-    
-        const url = `${APIURL}/user/${this.state.id}`
-            fetch(url, {
-                method:'GET',
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                    Authorization: `${localStorage.getItem('token')}`
-                })
-            }).then((res) => {
-                if (res.status !== 200) {
-                    // throw new Error("Error");
-                } else return res.json();
-            }).then((data) => {
-                console.log("User", data.users);
-                this.setState({ 
-                    firstName: data.users.firstName,
-                    lastName: data.users.lastName,
-                    username: data.users.username,
-                    role: data.users.role,
-                })
+    console.log(this.state.id, localStorage.getItem)
+    const url = `${APIURL}/user/account`
+        fetch(url, {
+            method:'GET',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                Authorization: `${localStorage.getItem('token')}`
             })
-            // .catch((err) => alert(err));
+        }).then((res) => {
+            if (res.status !== 200) {
+                // throw new Error("Error");
+            } else return res.json();
+        }).then((data) => {
+            console.log("User", data);
+            this.setState({ 
+                accountData: data
+            })
+        })
+        // .catch((err) => alert(err));
     }
-
-
 
     showDrawer = () => {
         this.setState({
@@ -111,14 +82,11 @@ handleGetID = () => {
         visible: false,
         });
     };
-    
 
-
-
-render(){
-    const { visible } = this.state;
-    return(
-        <div style={{fontFamily: "Montserrat", textAlign: 'center'}}>
+    render(){
+        const { visible } = this.state;
+        return(
+            <div style={{fontFamily: "Montserrat", textAlign: 'center'}}>
             <Button  icon={<UserOutlined />}onClick={this.showDrawer} style={{backgroundColor: '#183446', border: '1px solid white', borderRadius: '5px', color: 'white'}}>My Account</Button>
 
             <Drawer
@@ -183,14 +151,13 @@ render(){
                 </Form.Item>
                 </Form>
 
-                <AccountDetails updateToken={this.props.updateToken}  accountData={this.state.accountData}/>
+                <AccountUser updateToken={this.props.updateToken}  accountData={this.state.accountData}/>
 
             </Drawer>
-        </div>
-    )
-}
+            </div>
+        )
+    }
 
 }
 
-
-export default MyAccount;
+export default AccountID;

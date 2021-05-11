@@ -54,9 +54,6 @@ class ProjectsCreate extends Component<PropsItems, ProjectData>{
 
 
 
-    componentDidMount(){
-        this.fetchProjectCreate();
-    }
 
     render(){
         return(

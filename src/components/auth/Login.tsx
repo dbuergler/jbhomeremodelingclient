@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import {Form, Input, Button, Select} from 'antd';
+import {Form, Input, Button, Select, notification} from 'antd';
 import APIURL from '../../helpers/environment';
 
 const {Option} = Select;
@@ -89,6 +89,9 @@ class Login extends Component<PropsItems, LoginData>{
         ).then((data) => {
             console.log(data.sessionToken, this.props)
             this.props.updateToken(data.sessionToken, data.user.role)
+        })
+        notification.info({
+            message: "You have successfully logged in!"
         })
 };
     

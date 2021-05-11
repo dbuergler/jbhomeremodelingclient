@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Form, Input, Button, Select, message, Alert} from 'antd';
+import {Form, Input, Button, Select, message, Alert, notification} from 'antd';
 import APIURL from '../../helpers/environment';
 
 
@@ -89,11 +89,12 @@ class SignUp extends React.Component<PropsItems, SignUpData>{
             console.log(this.props.updateToken)
             this.props.updateToken(data.sessionToken, data.user.role)
         })
+        notification.info({
+            message: "You have successfully signed up!"
+        })
 };
     
- success = () => {
-    message.success('Welcome to your next remodel!')
- }
+
 
 
 
@@ -159,7 +160,7 @@ render() {
         }
         </Form.Item>
         <Form.Item {...tailLayout}>
-        <Button  style={{backgroundColor: '#183446', border: '1px solid white', borderRadius: '5px', color: 'white' }} onClick={this.handleSubmit}>
+        <Button  style={{backgroundColor: '#183446', border: '1px solid white', borderRadius: '5px', color: 'white' }} onClick={this.handleSubmit} >
             Submit
         </Button>
         
