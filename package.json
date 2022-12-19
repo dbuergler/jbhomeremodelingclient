@@ -30,7 +30,6 @@
     "react-google-calendar-api": "^1.4.0",
     "react-paypal-express-checkout": "^1.0.5",
     "react-router-dom": "^5.2.0",
-    "react-scheduler-calendar": "^0.5.3-1",
     "react-scripts": "4.0.3",
     "react-square-payment-form": "^0.7.2",
     "react-stripe-elements": "^6.1.2",
@@ -64,7 +63,8 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.7"
+    "@types/react-router-dom": "^5.1.7",
+    "gh-pages": "^4.0.0"
   },
   "jest": {
     "transformIgnorePatterns": [
