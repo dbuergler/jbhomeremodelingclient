@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
-    "@craco/craco": "^6.4.5",
+    "@craco/craco": "^5.9.0",
     "@stripe/react-stripe-js": "^1.4.0",
     "@stripe/stripe-js": "^1.14.0",
     "@syncfusion/ej2-react-schedule": "^19.1.59",
@@ -13,19 +13,17 @@
     "@testing-library/user-event": "^12.8.3",
     "@types/jest": "^26.0.23",
     "@types/node": "^12.20.12",
-    "@types/react": "^17.0.5",
-    "@types/react-dom": "^17.0.3",
     "@types/react-stripe-elements": "^6.0.4",
     "@types/stripe": "^8.0.417",
     "antd": "^4.15.5",
     "date-fns": "^2.21.3",
     "googleapis": "^72.0.0",
-    "react": "^17.0.2",
-    "react-calendly": "^2.0.0",
+    "react": "^18.2.0",
+    "react-calendly": "^2.2.3",
     "react-copyright": "0.0.1",
-    "react-dom": "^17.0.2",
+    "react-dom": "^18.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^2.1.8",
     "react-stripe-elements": "^6.1.2",
     "reactstrap": "^8.9.0",
     "stripe": "^8.148.0",
@@ -33,7 +31,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -57,6 +55,8 @@
     ]
   },
   "devDependencies": {
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
     "@types/react-router-dom": "^5.1.7",
     "gh-pages": "^3.0.0"
   },
@@ -64,5 +64,9 @@
     "transformIgnorePatterns": [
       "/node_modules/(?!antd|@ant-design|rc-.+?|@babel/runtime).+(js|jsx)$"
     ]
+  },
+  "resolutions": {
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2"
   }
 }

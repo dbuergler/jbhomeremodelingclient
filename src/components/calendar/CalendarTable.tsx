@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Button, notification} from 'antd';
 import CalendarUpdate from './CalendarUpdate';
 import CalendarDelete from './CalendarDelete';
-import {InlineWidget} from 'react-calendly';
+import {InlineWidget} from "react-calendly";
 import { NotificationOutlined } from '@ant-design/icons';
 
 
